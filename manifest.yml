@@ -1,0 +1,10 @@
+---
+name: Jupyter
+category: Interactive Apps
+subcategory: Servers
+role: batch_connect
+description: |
+  This app will launch a [Jupyter] server using [Python]
+
+  [Jupyter]: https://jupyter.org/
+  [Python]: https://www.python.org/

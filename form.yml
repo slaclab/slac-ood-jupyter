@@ -1,0 +1,70 @@
+---
+cluster: "sdf_cluster"
+form:
+  - slurm_partition
+  - slurm_account
+  - jupyterlab
+  - bc_num_hours
+  - num_cores
+  - mem
+  - gpu_type
+  - num_gpus
+  - jupyter_image
+  - bc_email_on_started
+attributes:
+  jupyterlab:
+    widget: "check_box"
+    label: "Use JupyterLab instead of Jupyter Notebook?"
+    help: |
+      JupyterLab is the next generation of Jupyter, and is completely compatible with existing Jupyter Notebooks.
+  num_cores:
+    widget: "number_field"
+    label: "Number of CPU cores"
+    value: 1
+    help: |
+      Number of cpu cores available for jupyter instance
+    min: 1
+    max: 44
+    step: 1
+  mem:
+    widget: "number_field"
+    value: "2048"
+    help:
+      Total memory for jupyter instance in MB.
+    min: 100
+    max: 256000
+  gpu_type:
+    widget: "select"
+    label: "GPU Type"
+    help: |
+      Number and type of GPUs
+    options:
+      - [ "Geforce 2080Ti", "geforce_rtx_2080_ti" ]
+      - [ "Geforce 1080Ti", "geforce_gtx_1080_ti" ]
+      - [ "Tesla V100", "v100" ]
+  num_gpus:
+    widget: "number_field"
+    label: "Number of GPUs"
+    value: 0
+    help: |
+      Number of GPUs requested
+    min: 0
+    max: 10
+    step: 1
+  slurm_partition:
+    label: "Partition"
+    help: "Slurm Partition to launch Jupyter on"
+    value: "shared"
+  slurm_account:
+    label: "Account"
+    help: "Slurm Account to launch Jupyter on"
+    value: "shared"
+  jupyter_image: 
+    widget: "select"
+    label: "Jupyter Instance"
+    help: |
+      Which jupyter image to run
+    options:
+      - [ "slac-ml/20200211.0", "slac-ml/20200211.0" ]
+      - [ "scdms/v02-02-01", "scdms/v02-02-01" ]
+

@@ -1,19 +1,7 @@
 #!/usr/bin/env bash
 
-###
-# Start Jupyter server
-###
-
-# Clean the environment
-module purge
-
-# Set working directory to notebook root directory
+# Set notebook directory
 cd "${NOTEBOOK_ROOT}"
-
-# Setup Jupyter environment
-source /etc/profile.d/modules.sh
-export MODULEPATH=/usr/share/Modules/modulefiles:/opt/modulefiles:/afs/slac/package/singularity/modulefiles
-export XDG_RUNTIME_DIR=""
 
 # Launch the Jupyter server
 module load <%= context.jupyter_image %>

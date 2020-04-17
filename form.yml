@@ -1,9 +1,10 @@
 ---
-cluster: "sdf_cluster"
+cluster: "sdf"
 form:
   - slurm_partition
   - slurm_account
   - jupyterlab
+  - core_mode
   - bc_num_hours
   - num_cores
   - mem
@@ -17,6 +18,11 @@ attributes:
     label: "Use JupyterLab instead of Jupyter Notebook?"
     help: |
       JupyterLab is the next generation of Jupyter, and is completely compatible with existing Jupyter Notebooks.
+  core_mode:
+    widget: "check_box"
+    label: "Run Jupyter with --core-mode"
+    help: |
+      Leave unchecked if you do not know what this is for
   num_cores:
     widget: "number_field"
     label: "Number of CPU cores"

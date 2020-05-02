@@ -2,6 +2,7 @@
 cluster: "sdf"
 form:
   - jupyter_image
+  - commands
   - slurm_partition
   - slurm_account
   - jupyterlab
@@ -13,6 +14,11 @@ form:
   - num_gpus
   - bc_email_on_started
 attributes:
+  commands:
+    widget: text_area
+    label: "Commands to initate jupyter"
+    help: |
+      Commands to initiate jupyter binary.
   jupyterlab:
     widget: "check_box"
     label: "Use JupyterLab instead of Jupyter Notebook?"

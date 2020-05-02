@@ -4,7 +4,9 @@ category: Interactive Apps
 subcategory: Servers
 role: batch_connect
 description: |
-  This app will launch a [Jupyter] server using [Python]
+  This app will launch a customizable [Jupyter] server on our cluster and automatically present its interface on this webpage.
+  You are free to create your own instances in [Conda]/[Singularity] etc on our clusters.
 
   [Jupyter]: https://jupyter.org/
-  [Python]: https://www.python.org/
+  [Conda]: https://docs.conda.io/
+  [Singularity]: https://sylabs.io/singularity/

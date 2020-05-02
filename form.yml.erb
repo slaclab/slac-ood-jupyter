@@ -1,9 +1,9 @@
+
 ---
 cluster: "sdf"
 form:
-  - jupyter_image
+#  - jupyter_image
   - commands
-  - slurm_partition
   - slurm_account
   - jupyterlab
   - core_mode
@@ -18,7 +18,7 @@ attributes:
     widget: text_area
     label: "Commands to initate jupyter"
     help: |
-      Commands to initiate jupyter binary.
+      Initial commands required activate jupyter
   jupyterlab:
     widget: "check_box"
     label: "Use JupyterLab instead of Jupyter Notebook?"
@@ -63,13 +63,9 @@ attributes:
     min: 0
     max: 10
     step: 1
-  slurm_partition:
-    label: "Partition"
-    help: "Slurm Partition to launch Jupyter on"
-    value: "shared"
   slurm_account:
     label: "Account"
-    help: "Slurm Account to launch Jupyter on"
+    help: "Slurm Account and Partition to launch Jupyter on"
     value: "shared"
   jupyter_image: 
     widget: "select"
@@ -77,12 +73,12 @@ attributes:
     help: |
       Which jupyter image to run
     options:
-      - [ "slac-ml/20200211.0", "slac-ml/20200211.0" ]
-      - [ "scdms/v02-02-01", "scdms/v02-02-01" ]
-      - [ "scdms/v02-04-01", "scdms/v02-04-01" ]
-      - [ "atlas-jupyter/test", "atlas-jupyter/test" ]
-      - [ "neutrino-jupyter/ub18.04-cpu-ana0", "neutrino-jupyter/ub18.04-cpu-ana0" ]
-      - [ "neutrino-jupyter/ub18.04-gpu-ana0-ml-larcv2", "neutrino-jupyter/ub18.04-gpu-ana0-ml-larcv2" ]
-      - [ "neutrino-jupyter/ub18.04-gpu-ana0-ml",  "neutrino-jupyter/ub18.04-gpu-ana0-ml" ]
-      - [ "neutrino-jupyter/ub18.04-gpu-ana0-mn",  "neutrino-jupyter/ub18.04-gpu-ana0-mn" ]
+      - [ "slac-ml/20200211.0", "module load slac-ml/20200211.0" ]
+      - [ "scdms/v02-02-01", "module load scdms/v02-02-01" ]
+      - [ "scdms/v02-04-01", "module load scdms/v02-04-01" ]
+      - [ "atlas-jupyter/test", "module load atlas-jupyter/test" ]
+      - [ "neutrino-jupyter/ub18.04-cpu-ana0", "module load neutrino-jupyter/ub18.04-cpu-ana0" ]
+      - [ "neutrino-jupyter/ub18.04-gpu-ana0-ml-larcv2", "module load neutrino-jupyter/ub18.04-gpu-ana0-ml-larcv2" ]
+      - [ "neutrino-jupyter/ub18.04-gpu-ana0-ml",  "module load neutrino-jupyter/ub18.04-gpu-ana0-ml" ]
+      - [ "neutrino-jupyter/ub18.04-gpu-ana0-mn",  "module load neutrino-jupyter/ub18.04-gpu-ana0-mn" ]
       

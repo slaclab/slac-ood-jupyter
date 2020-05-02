@@ -4,9 +4,10 @@ category: Interactive Apps
 subcategory: Servers
 role: batch_connect
 description: |
-  This app will launch a customizable [Jupyter] server on our cluster and automatically present its interface on this webpage.
+  This [app] will launch a customizable [Jupyter] server on our cluster and automatically present its interface on this webpage.
   You are free to create your own instances in [Conda]/[Singularity] etc on our clusters.
 
+  [app]: https://github.com/slaclab/slac-ood-jupyter
   [Jupyter]: https://jupyter.org/
   [Conda]: https://docs.conda.io/
   [Singularity]: https://sylabs.io/singularity/

@@ -73,6 +73,7 @@ attributes:
     options:
       - [ "slac-ml/20200211.0", "slac-ml/20200211.0" ]
       - [ "scdms/v02-02-01", "scdms/v02-02-01" ]
+      - [ "scdms/v02-04-01", "scdms/v02-04-01" ]
       - [ "atlas-jupyter/test", "atlas-jupyter/test" ]
       - [ "neutrino-jupyter/ub18.04-cpu-ana0", "neutrino-jupyter/ub18.04-cpu-ana0" ]
       - [ "neutrino-jupyter/ub18.04-gpu-ana0-ml-larcv2", "neutrino-jupyter/ub18.04-gpu-ana0-ml-larcv2" ]

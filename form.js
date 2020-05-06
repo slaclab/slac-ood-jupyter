@@ -147,7 +147,24 @@ function set_gpu_change_handler() {
   gpus.change(num_gpus_change_handler);
 }
 
+/**
+ * Toggle --core-mode if not juptyerlab
+ */
+function core_mode_handler() {
+  let lab = $('#batch_connect_session_context_use_lab')[0].checked;
+  toggle_visibility_of_form_group(
+    '#batch_connect_session_context_use_core_mode',
+    lab
+  );
+  if( lab == false ){
+    $('#batch_connect_session_context_use_core_mode')[0].checked = false;
+  }
+}
 
+function set_core_mode_handler() {
+  core_mode_handler();
+  $('#batch_connect_session_context_use_lab').change( core_mode_handler );
+}
 
 /**
  * Main
@@ -161,3 +178,4 @@ toggle_cuda_version_visibility();
 set_node_type_change_handler();
 set_image_type_change_handler();
 set_gpu_change_handler();
+set_core_mode_handler();

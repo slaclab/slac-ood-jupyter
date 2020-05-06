@@ -18,7 +18,13 @@ attributes:
     widget: text_area
     label: "Commands to initate jupyter"
     help: |
-      Initial commands required activate jupyter
+      For singularity images use ```export SINGULARITY_IMAGE_PATH=/afs/slac/package/singularity/images/slac-ml/20200211.0/slac-jupyterlab@20200211.0.sif;
+      function jupyter() { singularity exec --nv -B /gpfs,/scratch,/nfs,/afs ${SINGULARITY_IMAGE_PATH} jupyter $@; }```
+      
+      For conda environments use ```export CONDA_PREFIX=/gpfs/slac/cryo/fs1/g/C091/miniconda3; export PATH=${CONDA_PREFIX}/bin/:$PATH;
+      source ${CONDA_PREFIX}/etc/profile.d/conda.sh;
+      conda env list;
+      conda activate tester```
   jupyterlab:
     widget: "check_box"
     label: "Use JupyterLab instead of Jupyter Notebook?"

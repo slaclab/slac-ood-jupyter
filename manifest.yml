@@ -8,16 +8,12 @@ description: |
   You are free to create your own instances in [Conda]/[Singularity] etc on our clusters.
 
   Due to issues of AFS tokens, you will need to ask Yee to create a new 'jupyter' home directory for you and you will then need to run the following 
-  `cd ~`
-  `ln -sf  /gpfs/slac/staas/fs1/g/jupyter/$(id -gn)/$(id -un)/ondemand /u/$(id -gn)/$(id -un)/ondemand`
-  `ln -sf  /gpfs/slac/staas/fs1/g/jupyter/$(id -gn)/$(id -un)/.local/share/jupyter /u/$(id -gn)/$(id -un)/.local/share/jupyter`
-
-  For singularity images use ```function jupyter() { singularity exec --nv -B /gpfs,/scratch,/nfs,/afs /afs/slac/package/singularity/images/slac-ml/20200211.0/slac-jupyterlab@20200211.0.sif jupyter $@ }```
-
-  For conda images use ```export CONDA_PREFIX=/gpfs/slac/cryo/fs1/g/C091/miniconda3; export PATH=${CONDA_PREFIX}/bin/:$PATH;
-  source ${CONDA_PREFIX}/etc/profile.d/conda.sh;
-  conda env list;
-  conda activate tester```
+  ```export ONDEMAND_DIR=/gpfs/slac/staas/fs1/g/jupyter/$(id -gn)/$(id -un)/ondemand;
+  export JUPYTER_SHARE_DIR=/gpfs/slac/staas/fs1/g/jupyter/$(id -gn)/$(id -un)/.local/share/jupyter; 
+  export JUPYTER_DIR=/gpfs/slac/staas/fs1/g/jupyter/$(id -gn)/$(id -un)/.jupyter; 
+  if [ -e " ~/.local/share/jupyter" ]; then mv ~/.local/share/jupyter ~/.local/share/jupyter.orig; fi;
+  if [ -e "~/.jupyter" ]; then mv ~/.jupyter ~/.jupyter.orig; fi;`
+  cd ~ && mkdir -p $ONDEMAND_DIR && ln -sf $ONDEMAND_DIR ~/ondemand && mkdir -p ~/.local/share/ && mkdir -p $JUPYTER_SHARE_DIR && ln -sf $JUPYTER_SHARE_DIR ~/.local/share/jupyter && mkdir -p $JUPYTER_DIR && ln -sf $JUPYTER_DIR ~/.jupyter```
 
   [app]: https://github.com/slaclab/slac-ood-jupyter
   [Jupyter]: https://jupyter.org/

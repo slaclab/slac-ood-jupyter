@@ -97,6 +97,37 @@ function node_type_change_hander() {
 }
 
 /**
+ * Toggle Advance Jupyter Initialization commands
+ */
+function image_type_change_handler() {
+  let selected = $('#batch_connect_session_context_jupyter_image').find(':selected');
+  let text = selected[0].text;
+  let commands = selected[0].value;
+  console.log("selected " + text + " -> " + commands);
+
+  $('#batch_connect_session_context_commands').val( commands )
+
+  let commands_visibility = true;
+  if( text == 'Custom Singularity Image...' 
+      || text == 'Custom Conda Environment...' ) {
+    commands_visibility = false;
+  };
+  //toggle_visibilty_of_form_group(
+  // 
+  //  '#batch_connect_session_context_commands',
+  //  // commands_visibility
+  //  true
+  //);
+  $('#batch_connect_session_context_commands')[0].readOnly = commands_visibility;
+
+}
+
+function set_image_type_change_handler() {
+  let instance = $('#batch_connect_session_context_jupyter_image');
+  instance.change(image_type_change_handler);
+}
+
+/**
  * Main
  */
 
@@ -106,4 +137,4 @@ toggle_cuda_version_visibility();
 
 // Install event handlers
 set_node_type_change_handler();
-
+set_image_type_change_handler();

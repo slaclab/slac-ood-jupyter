@@ -2,7 +2,7 @@
 ---
 cluster: "sdf"
 form:
-#  - jupyter_image
+  - jupyter_image
   - commands
   - slurm_account
   - jupyterlab
@@ -17,14 +17,6 @@ attributes:
   commands:
     widget: text_area
     label: "Commands to initate jupyter"
-    help: |
-      For singularity images use ```export SINGULARITY_IMAGE_PATH=/afs/slac/package/singularity/images/slac-ml/20200211.0/slac-jupyterlab@20200211.0.sif;
-      function jupyter() { singularity exec --nv -B /gpfs,/scratch,/nfs,/afs ${SINGULARITY_IMAGE_PATH} jupyter $@; }```
-      
-      For conda environments use ```export CONDA_PREFIX=/gpfs/slac/cryo/fs1/g/C091/miniconda3; export PATH=${CONDA_PREFIX}/bin/:$PATH;
-      source ${CONDA_PREFIX}/etc/profile.d/conda.sh;
-      conda env list;
-      conda activate tester```
   jupyterlab:
     widget: "check_box"
     label: "Use JupyterLab instead of Jupyter Notebook?"
@@ -87,4 +79,9 @@ attributes:
       - [ "neutrino-jupyter/ub18.04-gpu-ana0-ml-larcv2", "module load neutrino-jupyter/ub18.04-gpu-ana0-ml-larcv2" ]
       - [ "neutrino-jupyter/ub18.04-gpu-ana0-ml",  "module load neutrino-jupyter/ub18.04-gpu-ana0-ml" ]
       - [ "neutrino-jupyter/ub18.04-gpu-ana0-mn",  "module load neutrino-jupyter/ub18.04-gpu-ana0-mn" ]
+      - [ "Custom Singularity Image...", "export SINGULARITY_IMAGE_PATH=/afs/slac/package/singularity/images/slac-ml/20200211.0/slac-jupyterlab@20200211.0.sif\nfunction jupyter() { singularity exec --nv -B /gpfs,/scratch,/nfs,/afs ${SINGULARITY_IMAGE_PATH} jupyter $@; }
+
+" ]
+      - [ "Custom Conda Environment...", "export CONDA_PREFIX=/gpfs/slac/cryo/fs1/g/C091/miniconda3\nexport PATH=${CONDA_PREFIX}/bin/:$PATH\nsource ${CONDA_PREFIX}/etc/profile.d/conda.sh\nconda env list\nconda activate tester" ]
+
       

@@ -4,8 +4,8 @@ cluster: "sdf"
 form:
   - jupyter_image
   - commands
-  - jupyterlab
-  - core_mode
+  - use_lab
+  - use_core_mode
   - slurm_account
   - bc_num_hours
   - num_cores
@@ -17,12 +17,15 @@ attributes:
   commands:
     widget: text_area
     label: "Commands to initate jupyter"
-  jupyterlab:
+  use_lab:
     widget: "check_box"
     label: "Use JupyterLab instead of Jupyter Notebook?"
     help: |
-      JupyterLab is the next generation of Jupyter, and is completely compatible with existing Jupyter Notebooks.
-  core_mode:
+      [JupyterLab] is the next generation of Jupyter, and is completely compatible with existing [Jupyter Notebook]s.
+      
+      [JupyterLab]: https://jupyterlab.readthedocs.io/
+      [Jupyter Notebook]: https://jupyter-notebook.readthedocs.io/en/stable/ui_components.html
+  use_core_mode:
     widget: "check_box"
     label: "Run Jupyter with --core-mode"
     help: |

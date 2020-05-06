@@ -49,7 +49,7 @@ function set_ppn_by_node_type(node_type_input, num_cores_input) {
  * @param      {string}    form_id  The form identifier
  * @param      {boolean}   show     Whether to show or hide
  */
-function toggle_visibilty_of_form_group(form_id, show) {
+function toggle_visibility_of_form_group(form_id, show) {
   let form_element = $(form_id);
   let parent = form_element.parent();
 
@@ -112,7 +112,7 @@ function image_type_change_handler() {
       || text == 'Custom Conda Environment...' ) {
     commands_visibility = false;
   };
-  //toggle_visibilty_of_form_group(
+  //toggle_visibility_of_form_group(
   // 
   //  '#batch_connect_session_context_commands',
   //  // commands_visibility
@@ -127,6 +127,28 @@ function set_image_type_change_handler() {
   instance.change(image_type_change_handler);
 }
 
+
+/**
+ * Toggle GPU Options
+ */
+
+function num_gpus_change_handler() {
+  let gpu_type_visibility = $('#batch_connect_session_context_num_gpus')[0].value == "0" ? false : true;
+  console.log("GPUS " + gpu_type_visibility );
+  toggle_visibility_of_form_group(
+    '#batch_connect_session_context_gpu_type',
+    gpu_type_visibility
+  ); 
+}
+
+function set_gpu_change_handler() {
+  let gpus = $('#batch_connect_session_context_num_gpus');
+  num_gpus_change_handler();
+  gpus.change(num_gpus_change_handler);
+}
+
+
+
 /**
  * Main
  */
@@ -138,3 +160,4 @@ toggle_cuda_version_visibility();
 // Install event handlers
 set_node_type_change_handler();
 set_image_type_change_handler();
+set_gpu_change_handler();

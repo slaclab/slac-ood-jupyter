@@ -15,14 +15,14 @@ function clamp(min, max, val) {
  * Fix num cores, allowing blanks to remain
  */
 function fix_num_cores() {
-  let node_type_input = $('#batch_connect_session_context_node_type');
+  // let node_type_input = $('#batch_connect_session_context_node_type');
   let num_cores_input = $('#batch_connect_session_context_num_cores');
 
   if(num_cores_input.val() === '') {
     return;
   }
 
-  set_ppn_by_node_type(node_type_input, num_cores_input);
+  // set_ppn_by_node_type(node_type_input, num_cores_input);
 }
 
 /**
@@ -106,3 +106,4 @@ toggle_cuda_version_visibility();
 
 // Install event handlers
 set_node_type_change_handler();
+

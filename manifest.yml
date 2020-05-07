@@ -7,13 +7,8 @@ description: |
   This [app] will launch a customizable [Jupyter] server on our cluster and automatically present its interface on this webpage.
   You are free to create your own instances in [Conda]/[Singularity] etc on our clusters.
 
-  Due to issues of AFS tokens, you will need to ask Yee to create a new 'jupyter' home directory for you and you will then need to run the following 
-  ```export ONDEMAND_DIR=/gpfs/slac/staas/fs1/g/jupyter/$(id -gn)/$(id -un)/ondemand;
-  export JUPYTER_SHARE_DIR=/gpfs/slac/staas/fs1/g/jupyter/$(id -gn)/$(id -un)/.local/share/jupyter; 
-  export JUPYTER_DIR=/gpfs/slac/staas/fs1/g/jupyter/$(id -gn)/$(id -un)/.jupyter; 
-  if [ -e " ~/.local/share/jupyter" ]; then mv ~/.local/share/jupyter ~/.local/share/jupyter.orig; fi;
-  if [ -e "~/.jupyter" ]; then mv ~/.jupyter ~/.jupyter.orig; fi;`
-  cd ~ && mkdir -p $ONDEMAND_DIR && ln -sf $ONDEMAND_DIR ~/ondemand && mkdir -p ~/.local/share/ && mkdir -p $JUPYTER_SHARE_DIR && ln -sf $JUPYTER_SHARE_DIR ~/.local/share/jupyter && mkdir -p $JUPYTER_DIR && ln -sf $JUPYTER_DIR ~/.jupyter```
+  Due to issues of AFS tokens, you will need to ask Yee to create a new 'jupyter' home directory for you before using this. You will then also need to run the following script to create symlinks from your AFS home directory. 
+  ```sh /gpfs/slac/staas/fs1/g/jupyter/ood/convert.sh```
 
   [app]: https://github.com/slaclab/slac-ood-jupyter
   [Jupyter]: https://jupyter.org/

@@ -135,7 +135,10 @@ function set_image_type_change_handler() {
 
 function num_gpus_change_handler() {
   let gpu_type_visibility = $('#batch_connect_session_context_num_gpus')[0].value == "0" ? false : true;
-  console.log("GPUS " + gpu_type_visibility );
+  // if just made visible, select first item
+  if ( $('#batch_connect_session_context_gpu_type').is(':hidden') ) {
+    $('#batch_connect_session_context_gpu_type').val( $('#batch_connect_session_context_gpu_type').children()[0].value );
+  }
   toggle_visibility_of_form_group(
     '#batch_connect_session_context_gpu_type',
     gpu_type_visibility

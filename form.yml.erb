@@ -88,10 +88,10 @@ attributes:
       - [ "scdms/v02-02-01", "source /cvmfs/cdms.opensciencegrid.org/setup_cdms.sh -d /cvmfs/cdms.opensciencegrid.org V02-02-01" ]
       - [ "scdms/v02-04-01", "source /cvmfs/cdms.opensciencegrid.org/setup_cdms.sh -d /cvmfs/cdms.opensciencegrid.org V02-04-01" ]
       - [ "atlas-jupyter/test", "ls /cvmfs/cvmfs-config.cern.ch >/dev/null\nls /cvmfs/oasis.opensciencegrid.org >/dev/null\nls /cvmfs/atlas.cern.ch >/dev/null\nls /cvmfs/atlas-condb.cern.ch >/dev/null\nls /cvmfs/sft.cern.ch >/dev/null\nls /cvmfs/atlas-nightlies.cern.ch\nls /cvmfs/unpacked.cern.ch >/dev/null\nls /cvmfs/cdms.opensciencegrid.org >/dev/null\nls /cvmfs/juno.ihep.ac.cn >/dev/null\nls /cvmfs/sw.lsst.eu >/dev/null\nexport SINGULARITY_IMAGE_PATH=/gpfs/slac/atlas/fs1/u/yangw/atlas-test.img\nfunction jupyter() { singularity exec --nv -B /gpfs,/scratch,/nfs,/afs ${SINGULARITY_IMAGE_PATH} jupyter $@; }" ]
-      - [ "neutrino-jupyter/ub18.04-cpu-ana0", "module load neutrino-jupyter/ub18.04-cpu-ana0" ]
-      - [ "neutrino-jupyter/ub18.04-gpu-ana0-ml-larcv2", "module load neutrino-jupyter/ub18.04-gpu-ana0-ml-larcv2" ]
-      - [ "neutrino-jupyter/ub18.04-gpu-ana0-ml",  "module load neutrino-jupyter/ub18.04-gpu-ana0-ml" ]
-      - [ "neutrino-jupyter/ub18.04-gpu-ana0-mn",  "module load neutrino-jupyter/ub18.04-gpu-ana0-mn" ]
+      - [ "neutrino-jupyter/ub18.04-cpu-ana0", "export SINGULARITY_IMAGE_PATH=/gpfs/slac/staas/fs1/g/neutrino/images/ub18.04-cpu-ana0.sif\nfunction jupyter() { singularity exec --nv -B /gpfs,/scratch,/nfs,/afs ${SINGULARITY_IMAGE_PATH} jupyter $@; }" ]
+      - [ "neutrino-jupyter/ub18.04-gpu-ana0-ml-larcv2", "export SINGULARITY_IMAGE_PATH=/gpfs/slac/staas/fs1/g/neutrino/images/ub18.04-gpu-ana0-ml-larcv2.sif\nfunction jupyter() { singularity exec --nv -B /gpfs,/scratch,/nfs,/afs ${SINGULARITY_IMAGE_PATH} jupyter $@; }" ]
+      - [ "neutrino-jupyter/ub18.04-gpu-ana0-ml",  "export SINGULARITY_IMAGE_PATH=/gpfs/slac/staas/fs1/g/neutrino/images/ub18.04-gpu-ana0-ml.sif\nfunction jupyter() { singularity exec --nv -B /gpfs,/scratch,/nfs,/afs ${SINGULARITY_IMAGE_PATH} jupyter $@; }" ]
+      - [ "neutrino-jupyter/ub18.04-gpu-ana0-mn",  "export SINGULARITY_IMAGE_PATH=/gpfs/slac/staas/fs1/g/neutrino/images/ub18.04-gpu-ana0-mn.sif\nfunction jupyter() { singularity exec --nv -B /gpfs,/scratch,/nfs,/afs ${SINGULARITY_IMAGE_PATH} jupyter $@; }" ]
       - [ "Custom Singularity Image...", "export SINGULARITY_IMAGE_PATH=/afs/slac/package/singularity/images/slac-ml/20200211.0/slac-jupyterlab@20200211.0.sif\nfunction jupyter() { singularity exec --nv -B /gpfs,/scratch,/nfs,/afs ${SINGULARITY_IMAGE_PATH} jupyter $@; }
 
 " ]

@@ -124,6 +124,7 @@ function image_type_change_handler() {
 
 function set_image_type_change_handler() {
   let instance = $('#batch_connect_session_context_jupyter_image');
+  image_type_change_handler();
   instance.change(image_type_change_handler);
 }
 

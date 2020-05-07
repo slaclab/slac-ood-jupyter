@@ -103,7 +103,7 @@ function image_type_change_handler() {
   let selected = $('#batch_connect_session_context_jupyter_image').find(':selected');
   let text = selected[0].text;
   let commands = selected[0].value;
-  console.log("selected " + text + " -> " + commands);
+  // console.log("selected " + text + " -> " + commands);
 
   $('#batch_connect_session_context_commands').val( commands )
 

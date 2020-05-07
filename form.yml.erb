@@ -29,6 +29,10 @@ attributes:
     widget: "check_box"
     label: |
       Disable JupyterLab extensions (Run with --core-mode)
+  bc_num_hours:
+    widget: "number_field"
+    help: |
+      Number of hours for which the Jupyter instance will runs for
   num_cores:
     widget: "number_field"
     label: "Number of CPU cores"
@@ -40,9 +44,10 @@ attributes:
     step: 1
   mem:
     widget: "number_field"
+    label: "Total Memory to allocate"
     value: "2048"
     help:
-      Total memory for jupyter instance in MB.
+      Total memory for Jupyter instance in metabytes
     min: 128
     max: 256000
     step: 128

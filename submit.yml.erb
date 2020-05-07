@@ -2,6 +2,9 @@
 <% 
   gpus = num_gpus.blank? ? 0 : num_gpus.to_i
 %>
+<% if gpus > 0 and gpu_type != "Any" %>
+  <% gpus = gpu_type + ':' + gpus.to_s %>
+<% end %>
 batch_connect:
   template: "basic"
 script:

@@ -1,7 +1,7 @@
 ---
 name: Jupyter
 category: Interactive Apps
-subcategory: Servers
+subcategory: Services
 role: batch_connect
 description: |
   This [app] will launch a customizable [Jupyter] server on our cluster and automatically present its interface on this webpage.

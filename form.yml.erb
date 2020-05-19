@@ -86,6 +86,7 @@ attributes:
     options:
       - [ "slac-ml/20200227.0", "module load slac-ml/20200227.0" ]
       - [ "slac-ml/20200211.0", "module load slac-ml/20200211.0" ]
+      - [ "scdms/allkernels", "source /gpfs/slac/staas/fs1/supercdms/packages/jupyter/venv/bin/activate" ]
       - [ "scdms/v02-04-01", "source /cvmfs/cdms.opensciencegrid.org/setup_cdms.sh -d /cvmfs/cdms.opensciencegrid.org V02-04-01" ]
       - [ "scdms/v02-02-01", "source /cvmfs/cdms.opensciencegrid.org/setup_cdms.sh -d /cvmfs/cdms.opensciencegrid.org V02-02-01" ]
       - [ "atlas-jupyter/test", "ls /cvmfs/oasis.opensciencegrid.org /cvmfs/atlas.cern.ch /cvmfs/atlas-condb.cern.ch /cvmfs/atlas-nightlies.cern.ch /cvmfs/sft.cern.ch /cvmfs/unpacked.cern.ch /cvmfs/atlas.sdcc.bnl.gov >/dev/null\nexport SINGULARITY_IMAGE_PATH=/cvmfs/atlas.sdcc.bnl.gov/jupyter/t3s/slac/singularity/atlas-slac.sif\nfunction jupyter() { singularity exec --nv -B /cvmfs,/gpfs,/scratch,/nfs,/afs ${SINGULARITY_IMAGE_PATH} jupyter $@; }" ]

@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 
-# Set notebook directory
-cd "${NOTEBOOK_ROOT}"
-
 # Launch the Jupyter server
 <%= context.commands.gsub(/(\r)?\n/, "\n") %>
 
+# Set notebook directory
+cd "${NOTEBOOK_ROOT}"
 jupyter <%= context.use_lab == "1" ? "lab" : "notebook" %>  <%= context.use_core_mode == "1" ? "--core-mode" : "" %> --config="${CONFIG_FILE}"

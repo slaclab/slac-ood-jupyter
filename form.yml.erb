@@ -84,7 +84,7 @@ attributes:
     help: |
       Which Jupyter image to run
     options:
-      - [ "ml-at-slac/school-2020-09","export SINGULARITY_IMAGE_PATH=/gpfs/slac/staas/fs1/g/neutrino/images/ml-at-slac-school-2020-09.sif\nexport PYTHONPATH=\"\"\nfunction jupyter() { singularity exec --nv -B /gpfs,/scratch,/sdf/group,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@}" ]
+      - [ "ml-at-slac/school-2020-09","export SINGULARITY_IMAGE_PATH=/gpfs/slac/staas/fs1/g/neutrino/images/ml-at-slac-school-2020-09.sif\nexport PYTHONPATH=\"\"\nfunction jupyter() { singularity exec --nv -B /gpfs,/scratch,/sdf/group,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@ ;}" ]
       - [ "slac-ml/20200227.0", "module load slac-ml/20200227.0" ]
       - [ "slac-ml/20200211.0", "module load slac-ml/20200211.0" ]
       - [ "scdms/allkernels", "export NOTEBOOK_ROOT=/gpfs/.../cdms/u/$USER\nexport PYTHONUSERBASE=$NOTEBOOK_ROOT/.local\nsource /gpfs/slac/staas/fs1/supercdms/packages/jupyter/venv/bin/activate" ]

@@ -7,9 +7,6 @@ description: |
   This [app] will launch a customizable [Jupyter] server on our cluster and automatically present its interface on this webpage.
   You are free to create your own instances in [Conda]/[Singularity] etc on our clusters.
 
-  Due to issues of AFS tokens, you will need to ask Yee to create a new 'jupyter' home directory for you before using this. You will then also need to run the following script to create symlinks from your AFS home directory. 
-  ```sh /gpfs/slac/staas/fs1/g/jupyter/ood/convert.sh```
-
   [app]: https://github.com/slaclab/slac-ood-jupyter
   [Jupyter]: https://jupyter.org/
   [Conda]: https://docs.conda.io/

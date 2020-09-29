@@ -3,15 +3,17 @@
   gpus = num_gpus.blank? ? 0 : num_gpus.to_i
 %>
 <% if gpus > 0 and gpu_type != "Any" %>
-  <% gpus = gpu_type + ':' + gpus.to_s %>
+  <% gpu_str = gpu_type + ':' + gpus.to_s %>
+<% else %>
+  <% gpu_str = gpus.to_s %>
 <% end %>
 batch_connect:
   template: "basic"
 script:
   native:
-    - "-A<%= slurm_account %>"
-    - "-p<%= slurm_account %>"
-    - "-N 1"
-    - "-c <%= num_cores %>"
+    - "-p<%= slurm_partition %>"
+    - "-A<%= slurm_partition %>"
+    - "-N1"
+    - "-c<%= num_cores %>"
     - "--mem=<%= mem %>"
-    - "--gpus=<%= gpus %>"
+    <% if gpus > 0 %>- "--gpus=<%= gpu_str %>"<% end %>

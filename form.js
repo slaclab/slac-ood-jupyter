@@ -103,12 +103,20 @@ function image_type_change_handler() {
   let selected = $('#batch_connect_session_context_jupyter_image').find(':selected');
   let text = selected[0].text;
   let commands = selected[0].value;
-  let commands_readonly = true;
-  
-  if( text == 'Custom Singularity Image...' 
-      || text == 'Custom Conda Environment...' ) {
-    commands_readonly = false;
+
+  console.log( commands );
+  console.log( $('#batch_connect_session_context_commands').text() );
+  // show last image command text if last image selected instead of default  
+  if( text == 'Last Image...' ) {
     commands = $('#batch_connect_session_context_commands').text();
+  }
+
+  $('#batch_connect_session_context_commands').val( commands )
+  let commands_readonly = true;
+  if( text == 'Custom Singularity Image...' 
+      || text == 'Custom Conda Environment...' 
+      || text == 'Last Image...' ) {
+    commands_readonly = false;
   };
   //toggle_visibility_of_form_group(
   // 
@@ -118,8 +126,6 @@ function image_type_change_handler() {
   //);
   
   // console.log("selected " + text + " -> " + commands);
-
-  $('#batch_connect_session_context_commands').val( commands );
   $('#batch_connect_session_context_commands')[0].readOnly = commands_readonly;
 
 }

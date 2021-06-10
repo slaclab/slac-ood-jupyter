@@ -64,7 +64,7 @@ attributes:
       - [ "Nvidia Geforce 1080Ti", "geforce_gtx_1080_ti" ]
       - [ "Nvidia Tesla V100", "v100" ]
       - [ "Nvidia Tesla A100", "a100" ]
-num_gpus:
+  num_gpus:
     widget: "number_field"
     label: "Number of GPUs"
     value: 0
@@ -73,13 +73,6 @@ num_gpus:
     min: 0
     max: 10
     step: 1
-  #slurm_account:
-  #  label: "Account"
-  #  help: |
-  #    Slurm [Account] to bill Jupyter job against
-#
-#      [Account]: https://confluence.slac.stanford.edu/display/SCSPub/Slurm+Batch
-#    value: "shared"
   slurm_partition:
     label: "Partition"
     help: |

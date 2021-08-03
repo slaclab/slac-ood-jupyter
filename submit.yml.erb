@@ -15,5 +15,5 @@ script:
     - "-A<%= slurm_partition %>"
     - "-N1"
     - "-c<%= num_cores %>"
-    - "--mem=<%= mem %>"
+    - "--mem=<% if mem == "" %>1024<% else %><%= mem %><% end %>"
     <% if gpus > 0 %>- "--gpus=<%= gpu_str %>"<% end %>

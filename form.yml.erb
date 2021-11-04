@@ -86,6 +86,7 @@ attributes:
     help: |
       Which Jupyter image to run
     options:
+      - [ "slac-ml/20211101.0", "export SINGULARITY_IMAGE_PATH=/sdf/group/ml/software/images/slac-ml/20211101.0/slac-ml@20211101.0.sif\nfunction jupyter() { singularity exec --nv -B /sdf,/gpfs,/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@; }" ]
       - [ "slac-ml/20200227.0", "export SINGULARITY_IMAGE_PATH=/sdf/sw/ml/slac-ml/20200227.0/slac-jupyterlab@20200227.0.sif\nfunction jupyter() { singularity exec --nv -B /sdf,/gpfs,/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@; }" ]
       - [ "slac-ml/20200211.0", "export SINGULARITY_IMAGE_PATH=/sdf/sw/ml/slac-ml/20200211.0/slac-jupyterlab@20200211.0.sif\nfunction jupyter() { singularity exec --nv -B /sdf,/gpfs,/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@; }" ]
       - [ "scdms/allkernels", "ls /cvmfs/cdms.opensciencegrid.org/\nexport PYTHONUSERBASE=~/.local\nsource /gpfs/slac/staas/fs1/supercdms/packages/jupyter/venv/bin/activate" ]

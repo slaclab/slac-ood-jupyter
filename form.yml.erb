@@ -78,15 +78,15 @@ attributes:
     help: |
       Slurm [Partition] to launch Jupyter job on
 
-      [Partition]: https://confluence.slac.stanford.edu/display/SCSPub/Slurm+Batch
-    value: "shared"
+      [Partition]: https://s3df.slac.stanford.edu/public/doc/#/batch-compute?id=s3df-partitions
+    value: "roma"
   jupyter_image: 
     widget: "select"
     label: "Jupyter Instance"
     help: |
       Which Jupyter image to run
     options:
-      - [ "slac-ml/20211101.0", "export SINGULARITY_IMAGE_PATH=/sdf/group/ml/software/images/slac-ml/20211101.0/slac-ml@20211101.0.sif\nfunction jupyter() { singularity exec --nv -B /sdf,/gpfs,/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@; }" ]
+      - [ "slac-ml/20211101.0", "export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/group/ml/software/images/slac-ml/20211101.0/slac-ml@20211101.0.sif\nfunction jupyter() { singularity exec --nv -B /sdf,/gpfs,/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@; }" ]
       - [ "slac-ml/20200227.0", "export SINGULARITY_IMAGE_PATH=/sdf/sw/ml/slac-ml/20200227.0/slac-jupyterlab@20200227.0.sif\nfunction jupyter() { singularity exec --nv -B /sdf,/gpfs,/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@; }" ]
       - [ "slac-ml/20200211.0", "export SINGULARITY_IMAGE_PATH=/sdf/sw/ml/slac-ml/20200211.0/slac-jupyterlab@20200211.0.sif\nfunction jupyter() { singularity exec --nv -B /sdf,/gpfs,/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@; }" ]
       - [ "scdms/allkernels", "ls /cvmfs/cdms.opensciencegrid.org/\nexport PYTHONUSERBASE=~/.local\nsource /gpfs/slac/staas/fs1/supercdms/packages/jupyter/venv/bin/activate" ]
@@ -102,10 +102,8 @@ attributes:
       - [ "neutrino-jupyter/2021-06-05", "export SINGULARITY_IMAGE_PATH=/sdf/group/neutrino/images/larcv2_ub20.04-cuda11.0-pytorch1.7.1-edepsim.sif \nexport PYTHONPATH=\"\"\nfunction jupyter() { singularity exec --nv -B /sdf,/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@ ; }" ]
       - [ "neutrino-jupyter/2021-01-27", "export SINGULARITY_IMAGE_PATH=/sdf/group/neutrino/images/larcv2_ub18.04-cuda10.2-pytorch1.7.1-edepsim.sif \nexport PYTHONPATH=\"\"\nfunction jupyter() { singularity exec --nv -B /sdf,/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@ ; }" ]
       - [ "lsstcam-jupyterlab", "source /sdf/group/lsst/software/conda/bin/activate lsstcam-jupyterlab" ]
-      - [ "lsst/r18_1_0",  "module load lsst/r18_1_0" ]
-      - [ "lsst/r19_0_0",  "module load lsst/r19_0_0" ]
       - [ "nexo/chroma", "export SINGULARITY_IMAGE_PATH=/sdf/group/nexo/software/chroma/Chroma_latest.sif\nfunction jupyter() { singularity exec --nv -B /sdf,/gpfs,/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@; }" ]
-      - [ "Custom Singularity Image...", "export SINGULARITY_IMAGE_PATH=/sdf/sw/ml/slac-ml/20200211.0/slac-jupyterlab@20200211.0.sif\nfunction jupyter() { singularity exec --nv -B /sdf,/gpfs,/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@; }
+      - [ "Custom Singularity Image...", "export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/sw/ml/slac-ml/20200211.0/slac-jupyterlab@20200211.0.sif\nfunction jupyter() { singularity exec --nv -B /sdf,/gpfs,/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@; }
 
 " ]
       - [ "Custom Conda Environment...", "export CONDA_PREFIX=/gpfs/slac/cryo/fs1/g/C091/miniconda3\nexport PATH=${CONDA_PREFIX}/bin/:$PATH\nsource ${CONDA_PREFIX}/etc/profile.d/conda.sh\nconda env list\nconda activate tester" ]

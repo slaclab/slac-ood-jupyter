@@ -178,6 +178,19 @@ function set_core_mode_handler() {
   $('#batch_connect_session_context_use_lab').change( core_mode_handler );
 }
 
+
+// if the cluster is interactive, then ignore a bunch of batch fields
+function set_cluster_handler() {
+  let cluster = $('#batch_connect_session_context_cluster option:selected').text();
+  let batch = cluster.includes("batch");
+  console.log("cluster", cluster, "is batch?", batch);
+  toggle_visibility_of_form_group( "#batch_connect_session_context_slurm_partition", batch );
+  toggle_visibility_of_form_group( "#batch_connect_session_context_num_cores", batch );
+  toggle_visibility_of_form_group( "#batch_connect_session_context_mem", batch );
+  toggle_visibility_of_form_group( "#batch_connect_session_context_num_gpus", batch );
+  $('#batch_connect_session_context_cluster').change( set_cluster_handler );
+}
+
 /**
  * Main
  */
@@ -191,3 +204,5 @@ set_node_type_change_handler();
 set_image_type_change_handler();
 set_gpu_change_handler();
 set_core_mode_handler();
+
+set_cluster_handler();

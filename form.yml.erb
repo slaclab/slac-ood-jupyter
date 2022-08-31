@@ -2,16 +2,16 @@
 ---
 cluster: '*'
 form:
+  - jupyter_image
+  - commands
+  - use_lab
+  - use_core_mode
   - slurm_partition
   - bc_num_hours
   - num_cores
   - mem
   - num_gpus
   - gpu_type
-  - jupyter_image
-  - commands
-  - use_lab
-  - use_core_mode
   - bc_email_on_started
 attributes:
   commands:

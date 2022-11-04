@@ -214,6 +214,7 @@ function set_cluster_handler() {
   let cluster = $('#batch_connect_session_context_cluster option:selected').text();
   let batch = cluster.includes("batch");
   console.log("cluster", cluster, "is batch?", batch);
+  toggle_visibility_of_form_group( "#batch_connect_session_context_slurm_account", batch );
   toggle_visibility_of_form_group( "#batch_connect_session_context_slurm_partition", batch );
   toggle_visibility_of_form_group( "#batch_connect_session_context_num_cores", batch );
   toggle_visibility_of_form_group( "#batch_connect_session_context_mem", batch );

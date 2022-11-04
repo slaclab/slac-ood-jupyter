@@ -99,41 +99,71 @@ function node_type_change_hander() {
 /**
  * Toggle Advance Jupyter Initialization commands
  */
-function image_type_change_handler() {
+function jupyter_image_group_change_handler() {
+
+  // get the group name, then filter the version select.options based on the group name
+  let group = $('#batch_connect_session_context_jupyter_image_group').find(':selected')[0].text;
+  console.log("selected jupyter image group ", group );
+
+  // iterate through list of jupyter_images, and hide the ones that don't match the group
+  let initial = true;
+  $('#batch_connect_session_context_jupyter_image option').each( function(){
+    // console.log( ' filtering item: ', this.text );
+    if( this.text.startsWith( group ) ){
+      // console.log('  showing');
+      $(this).show();
+      // if first one in list, select it to refresh
+      if( initial ){ $(this).prop('selected', true); initial = false; }
+    } else {
+      // console.log('  hiding');
+      $(this).hide();
+    }
+    $(this).attr( 'label', this.text.replace( group + '/', '' ) );
+  });
+  jupyter_image_change_handler();
+
+}
+
+function jupyter_image_change_handler() {
+
   let selected = $('#batch_connect_session_context_jupyter_image').find(':selected');
-  let text = selected[0].text;
+  let version = selected[0].text;
   let commands = selected[0].value;
 
-  console.log( commands );
-  console.log( $('#batch_connect_session_context_commands').text() );
-  // show last image command text if last image selected instead of default  
-  if( text == 'Last Image...' ) {
+  console.log( version );
+  // console.log( commands );
+  // console.log( $('#batch_connect_session_context_commands').text() );
+  // show last image command text if last image selected instead of default
+  if( version == 'Last Image...' ) {
     commands = $('#batch_connect_session_context_commands').text();
   }
 
   $('#batch_connect_session_context_commands').val( commands )
   let commands_readonly = true;
-  if( text == 'Custom Singularity Image...' 
-      || text == 'Custom Conda Environment...' 
-      || text == 'Last Image...' ) {
+  if( version.startsWith( 'Custom' ) ){
     commands_readonly = false;
   };
   //toggle_visibility_of_form_group(
-  // 
+  //
   //  '#batch_connect_session_context_commands',
   //  // commands_visibility
   //  true
   //);
-  
+
   // console.log("selected " + text + " -> " + commands);
   $('#batch_connect_session_context_commands')[0].readOnly = commands_readonly;
 
 }
 
-function set_image_type_change_handler() {
+function set_jupyter_image_group_change_handler() {
+  let group = $('#batch_connect_session_context_jupyter_image_group');
+  jupyter_image_group_change_handler();
+  group.change(jupyter_image_group_change_handler);
+}
+function set_jupyter_image_change_handler() {
   let instance = $('#batch_connect_session_context_jupyter_image');
-  image_type_change_handler();
-  instance.change(image_type_change_handler);
+  jupyter_image_change_handler();
+  instance.change(jupyter_image_change_handler);
 }
 
 
@@ -150,7 +180,7 @@ function num_gpus_change_handler() {
   toggle_visibility_of_form_group(
     '#batch_connect_session_context_gpu_type',
     gpu_type_visibility
-  ); 
+  );
 }
 
 function set_gpu_change_handler() {
@@ -178,6 +208,20 @@ function set_core_mode_handler() {
   $('#batch_connect_session_context_use_lab').change( core_mode_handler );
 }
 
+
+// if the cluster is interactive, then ignore a bunch of batch fields
+function set_cluster_handler() {
+  let cluster = $('#batch_connect_session_context_cluster option:selected').text();
+  let batch = cluster.includes("batch");
+  console.log("cluster", cluster, "is batch?", batch);
+  toggle_visibility_of_form_group( "#batch_connect_session_context_slurm_account", batch );
+  toggle_visibility_of_form_group( "#batch_connect_session_context_slurm_partition", batch );
+  toggle_visibility_of_form_group( "#batch_connect_session_context_num_cores", batch );
+  toggle_visibility_of_form_group( "#batch_connect_session_context_mem", batch );
+  toggle_visibility_of_form_group( "#batch_connect_session_context_num_gpus", batch );
+  $('#batch_connect_session_context_cluster').change( set_cluster_handler );
+}
+
 /**
  * Main
  */
@@ -188,6 +232,12 @@ toggle_cuda_version_visibility();
 
 // Install event handlers
 set_node_type_change_handler();
-set_image_type_change_handler();
+set_jupyter_image_group_change_handler();
+set_jupyter_image_change_handler();
 set_gpu_change_handler();
 set_core_mode_handler();
+
+set_cluster_handler();
+
+// Hide elements
+$('div').find("label[for='batch_connect_session_context_jupyter_image']").hide();

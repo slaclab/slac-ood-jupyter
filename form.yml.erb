@@ -1,18 +1,18 @@
-
 ---
 cluster: '*'
 form:
+  - jupyter_image_group
   - jupyter_image
   - commands
   - use_lab
   - use_core_mode
-  #- slurm_account
+  - cluster
+  - slurm_account
   - slurm_partition
   - bc_num_hours
   - num_cores
   - mem
   - num_gpus
-  - gpu_type
   - bc_email_on_started
 attributes:
   commands:
@@ -23,7 +23,7 @@ attributes:
     label: "Use JupyterLab instead of Jupyter Notebook?"
     help: |
       [JupyterLab] is the next generation of Jupyter, and is completely compatible with existing [Jupyter Notebook]s. Note this requires [JupyterLab] to be [installed].
-      
+
       [JupyterLab]: https://jupyterlab.readthedocs.io/
       [Jupyter Notebook]: https://jupyter-notebook.readthedocs.io/en/stable/ui_components.html
       [installed]: https://jupyterlab.readthedocs.io/en/stable/getting_started/installation.html
@@ -53,17 +53,6 @@ attributes:
     min: 128
     max: 1024000
     step: 128
-  gpu_type:
-    widget: "select"
-    label: "GPU Type"
-    help: |
-      Make and model of GPU(s) to request
-    options:
-      - [ "Any", "Any" ]
-      - [ "Nvidia Geforce 2080Ti", "geforce_rtx_2080_ti" ]
-      - [ "Nvidia Geforce 1080Ti", "geforce_gtx_1080_ti" ]
-      - [ "Nvidia Tesla V100", "v100" ]
-      - [ "Nvidia Tesla A100", "a100" ]
   num_gpus:
     widget: "number_field"
     label: "Number of GPUs"
@@ -73,38 +62,134 @@ attributes:
     min: 0
     max: 10
     step: 1
+  slurm_account:
+    label: "Account"
+    help: |
+      Slurm [Account] to launch Jupyter job on
+
+      [Account]: https:///public/doc/#/batch-compute?id=partitions-amp-accounts
   slurm_partition:
     label: "Partition"
     help: |
       Slurm [Partition] to launch Jupyter job on
 
-      [Partition]: https://s3df.slac.stanford.edu/public/doc/#/batch-compute?id=s3df-partitions
+      [Partition]: https:///public/doc/#/batch-compute?id=partitions-amp-accounts
     value: "roma"
-  jupyter_image: 
+  jupyter_image_group:
     widget: "select"
-    label: "Jupyter Instance"
+    label: "Jupyter Image"
+    options:
+      - slac
+      - supercdms
+      - atlas
+      - rubin
+      - neutrino
+      - nexo
+      - Custom
+  jupyter_image:
+    widget: "select"
+    label: "Jupyter Image Version"
     help: |
       Which Jupyter image to run
     options:
-      - [ "slac-ml/20211101.0", "export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/group/ml/software/images/slac-ml/20211101.0/slac-ml@20211101.0.sif\nfunction jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch/,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@; }" ]
-      - [ "supercdms/allkernels", "ls /cvmfs/cdms.opensciencegrid.org/\nexport PYTHONUSERBASE=~/.local\nsource /sdf/group/supercdms/software/packages/jupyter/venv/bin/activate" ]
-      - [ "slac-ml/SSAI","export SINGULARITY_IMAGE_PATH=/fs/ddn//sdf/group/ml/datasets/images/shared.sif\nexport PYTHONPATH=\"\"\nfunction jupyter() { singularity exec --nv -B /sdf,/fs,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@ ;}" ]
-      - [ "atlas-jupyter/20200502", "ls /cvmfs/oasis.opensciencegrid.org /cvmfs/atlas.cern.ch /cvmfs/atlas-condb.cern.ch /cvmfs/atlas-nightlies.cern.ch /cvmfs/sft.cern.ch /cvmfs/unpacked.cern.ch /cvmfs/atlas.sdcc.bnl.gov >/dev/null\nexport SINGULARITY_IMAGE_PATH=/cvmfs/atlas.sdcc.bnl.gov/jupyter/t3s/slac/singularity/atlas-slac.sif\nfunction jupyter() { singularity exec --nv -B /cvmfs,/sdf,/fs,/sdf/scratch/,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@; }" ]
-      - [ "atlas-jupyter-w-slurm-cli/20200714", "ls /cvmfs/oasis.opensciencegrid.org /cvmfs/atlas.cern.ch /cvmfs/atlas-condb.cern.ch /cvmfs/atlas-nightlies.cern.ch /cvmfs/sft.cern.ch /cvmfs/unpacked.cern.ch /cvmfs/atlas.sdcc.bnl.gov >/dev/null\nexport T3repo=/cvmfs/atlas.sdcc.bnl.gov/jupyter/t3s\nexport SINGULARITY_IMAGE_PATH=${T3repo}/slac/singularity/atlas-slac-w-slurm-cli-20200714.sif\nfunction jupyter() { singularity exec --nv -B /cvmfs,/sdf,/fs,/lscratch,/etc/slurm,/opt/slurm,/var/spool/slurmd,/run/slurm/conf/slurm.conf,/var/run/munge,/bin/modulecmd -B ${T3repo}/slac/singularity/99-zatlas.sh:/.singularity.d/env/99-zatlas.sh ${SINGULARITY_IMAGE_PATH} jupyter $@; }\n# -B /usr/lib64/libmunge.so.2,/usr/lib64/tcl8.5,/usr/lib64/libtcl8.5.so,/usr/share/tcl8.5,/usr/lib64/libexpect5.45.so" ]
-      - [ "atlas/20210403", "ls /cvmfs/oasis.opensciencegrid.org /cvmfs/atlas.cern.ch /cvmfs/atlas-condb.cern.ch /cvmfs/atlas-nightlies.cern.ch /cvmfs/sft.cern.ch /cvmfs/unpacked.cern.ch /cvmfs/atlas.sdcc.bnl.gov >/dev/null\nexport T3repo=/cvmfs/atlas.sdcc.bnl.gov/jupyter/t3s\nexport SINGULARITY_IMAGE_PATH=${T3repo}/slac/singularity/jupyter-conda.20210403.sif\nfunction jupyter() { singularity exec --nv -B /cvmfs,/sdf,/fs,/lscratch,/etc/slurm,/opt/slurm,/var/spool/slurmd,/run/slurm/conf/slurm.conf,/var/run/munge,/bin/modulecmd -B ${T3repo}/slac/singularity/99-zatlas.sh:/.singularity.d/env/99-zatlas.sh ${SINGULARITY_IMAGE_PATH} jupyter $@; }\n" ]
-      - [ "neutrino-jupyter/develop", "export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/group/neutrino/images/develop.sif \nexport PYTHONPATH=\"\"\nfunction jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@ ; }" ]
-      - [ "neutrino-jupyter/latest", "export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/group/neutrino/images/latest.sif \nexport PYTHONPATH=\"\"\nfunction jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@ ; }" ]
-      - [ "neutrino-jupyter/2021-11-03", "export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/group/neutrino/images/larcv2_ub20.04-cuda11.3-cudnn8-pytorch1.10.0-larndsim.sif \nexport PYTHONPATH=\"\"\nfunction jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@ ; }" ]
-      - [ "neutrino-jupyter/2021-08-03", "export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/group/neutrino/images/larcv2_ub20.04-cuda11.1-cudnn8-pytorch1.9.0-larndsim.sif \nexport PYTHONPATH=\"\"\nfunction jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@ ; }" ]
-      - [ "neutrino-jupyter/2021-06-10", "export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/group/neutrino/images/larcv2_ub20.04-cuda11.0-pytorch1.7.1-larndsim.sif \nexport PYTHONPATH=\"\"\nfunction jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@ ; }" ]
-      - [ "neutrino-jupyter/2021-06-05", "export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/group/neutrino/images/larcv2_ub20.04-cuda11.0-pytorch1.7.1-edepsim.sif \nexport PYTHONPATH=\"\"\nfunction jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@ ; }" ]
-      - [ "neutrino-jupyter/2021-01-27", "export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/group/neutrino/images/larcv2_ub18.04-cuda10.2-pytorch1.7.1-edepsim.sif \nexport PYTHONPATH=\"\"\nfunction jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@ ; }" ]
-      - [ "lsstcam-jupyterlab", "source /fs/ddn/sdf/group/lsst/software/conda/bin/activate lsstcam-jupyterlab" ]
-      - [ "nexo/chroma", "export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/group/nexo/software/chroma/Chroma_latest.sif\nfunction jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@; }" ]
-      - [ "Custom Singularity Image...", "export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/sw/ml/slac-ml/20200211.0/slac-jupyterlab@20200211.0.sif\nfunction jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@; }
-
-" ]
-      - [ "Custom Conda Environment...", "export CONDA_PREFIX=<path to conda install>3\nexport PATH=${CONDA_PREFIX}/bin/:$PATH\nsource ${CONDA_PREFIX}/etc/profile.d/conda.sh\nconda env list\nconda activate <environment>" ]
-      - [ "Last Image...", "" ]
-
-      
+      -
+        - slac/20211101.0
+        - |
+              export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/group/ml/software/images/slac-ml/20211101.0/slac-ml@20211101.0.sif
+              function jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch/,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@; }
+      -
+        - slac/SSAI
+        - |
+              export SINGULARITY_IMAGE_PATH=/fs/ddn//sdf/group/ml/datasets/images/shared.sif
+              export PYTHONPATH=\"\"\nfunction jupyter() { singularity exec --nv -B /sdf,/fs,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@ ;}
+      -
+        - supercdms/allkernels
+        - |
+              ls /cvmfs/cdms.opensciencegrid.org/\nexport PYTHONUSERBASE=~/.local
+              source /sdf/group/supercdms/software/packages/jupyter/venv/bin/activate
+      -
+        - atlas/20200502
+        - |
+              ls /cvmfs/oasis.opensciencegrid.org /cvmfs/atlas.cern.ch /cvmfs/atlas-condb.cern.ch /cvmfs/atlas-nightlies.cern.ch /cvmfs/sft.cern.ch /cvmfs/unpacked.cern.ch /cvmfs/atlas.sdcc.bnl.gov >/dev/null
+              export SINGULARITY_IMAGE_PATH=/cvmfs/atlas.sdcc.bnl.gov/jupyter/t3s/slac/singularity/atlas-slac.sif\nfunction jupyter() { singularity exec --nv -B /cvmfs,/sdf,/fs,/sdf/scratch/,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@; }
+      -
+        - atlas/20210403
+        - |
+              ls /cvmfs/oasis.opensciencegrid.org /cvmfs/atlas.cern.ch /cvmfs/atlas-condb.cern.ch /cvmfs/atlas-nightlies.cern.ch /cvmfs/sft.cern.ch /cvmfs/unpacked.cern.ch /cvmfs/atlas.sdcc.bnl.gov >/dev/null
+              export T3repo=/cvmfs/atlas.sdcc.bnl.gov/jupyter/t3s\nexport SINGULARITY_IMAGE_PATH=${T3repo}/slac/singularity/jupyter-conda.20210403.sif
+              function jupyter() { singularity exec --nv -B /cvmfs,/sdf,/fs,/lscratch,/etc/slurm,/opt/slurm,/var/spool/slurmd,/run/slurm/conf/slurm.conf,/var/run/munge,/bin/modulecmd -B ${T3repo}/slac/singularity/99-zatlas.sh:/.singularity.d/env/99-zatlas.sh ${SINGULARITY_IMAGE_PATH} jupyter $@; }
+      -
+        - atlas/20200714-with-slurm-cli
+        - |
+              ls /cvmfs/oasis.opensciencegrid.org /cvmfs/atlas.cern.ch /cvmfs/atlas-condb.cern.ch /cvmfs/atlas-nightlies.cern.ch /cvmfs/sft.cern.ch /cvmfs/unpacked.cern.ch /cvmfs/atlas.sdcc.bnl.gov >/dev/null
+              export T3repo=/cvmfs/atlas.sdcc.bnl.gov/jupyter/t3s
+              export SINGULARITY_IMAGE_PATH=${T3repo}/slac/singularity/atlas-slac-w-slurm-cli-20200714.sif
+              function jupyter() { singularity exec --nv -B /cvmfs,/sdf,/fs,/lscratch,/etc/slurm,/opt/slurm,/var/spool/slurmd,/run/slurm/conf/slurm.conf,/var/run/munge,/bin/modulecmd -B ${T3repo}/slac/singularity/99-zatlas.sh:/.singularity.d/env/99-zatlas.sh ${SINGULARITY_IMAGE_PATH} jupyter $@; }
+              # -B /usr/lib64/libmunge.so.2,/usr/lib64/tcl8.5,/usr/lib64/libtcl8.5.so,/usr/share/tcl8.5,/usr/lib64/libexpect5.45.so
+      -
+        - neutrino-jupyter/develop
+        - |
+              export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/group/neutrino/images/develop.sif
+              export PYTHONPATH=\"\"
+              function jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@ ; }
+      -
+        - neutrino-jupyter/latest
+        - |
+              export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/group/neutrino/images/latest.sif
+              export PYTHONPATH=\"\"
+              function jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@ ; }
+      -
+        - neutrino-jupyter/2021-11-03
+        - |
+              export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/group/neutrino/images/larcv2_ub20.04-cuda11.3-cudnn8-pytorch1.10.0-larndsim.sif
+              export PYTHONPATH=\"\"
+              function jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@ ; }
+      -
+        - neutrino-jupyter/2021-08-03
+        - |
+              export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/group/neutrino/images/larcv2_ub20.04-cuda11.1-cudnn8-pytorch1.9.0-larndsim.sif
+              export PYTHONPATH=\"\"
+              function jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@ ; }
+      -
+        - neutrino-jupyter/2021-06-10
+        - |
+              export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/group/neutrino/images/larcv2_ub20.04-cuda11.0-pytorch1.7.1-larndsim.sif
+              export PYTHONPATH=\"\"
+              function jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@ ; }
+      -
+        - neutrino-jupyter/2021-06-05
+        - |
+              export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/group/neutrino/images/larcv2_ub20.04-cuda11.0-pytorch1.7.1-edepsim.sif
+              export PYTHONPATH=\"\"
+              function jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@ ; }
+      -
+        - neutrino-jupyter/2021-01-27
+        - |
+              export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/group/neutrino/images/larcv2_ub18.04-cuda10.2-pytorch1.7.1-edepsim.sif
+              export PYTHONPATH=\"\"
+              function jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@ ; }
+      -
+        - rubin/lsstcam-jupyterlab
+        - |
+              source /fs/ddn/sdf/group/lsst/software/conda/bin/activate lsstcam-jupyterlab
+      -
+        - nexo/chroma
+        - |
+              export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/group/nexo/software/chroma/Chroma_latest.sif
+              function jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@; }
+      -
+        - Custom/Singularity Image...
+        - |
+              export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/sw/ml/slac-ml/20200211.0/slac-jupyterlab@20200211.0.sif
+              function jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@; }
+      -
+        - Custom/Conda Environment...
+        - |
+              export CONDA_PREFIX=<path to conda install>3
+              export PATH=${CONDA_PREFIX}/bin/:$PATH
+              source ${CONDA_PREFIX}/etc/profile.d/conda.sh
+              conda env list
+              conda activate <environment>
+      -
+        - Custom/Last Image...
+        - ""

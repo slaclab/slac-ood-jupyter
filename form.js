@@ -120,6 +120,7 @@ function jupyter_image_group_change_handler() {
     }
     $(this).attr( 'label', this.text.replace( group + '/', '' ) );
   });
+  jupyter_image_change_handler();
 
 }
 

@@ -7,12 +7,12 @@ form:
   - use_lab
   - use_core_mode
   - cluster
+  - slurm_account
   - slurm_partition
   - bc_num_hours
   - num_cores
   - mem
   - num_gpus
-  - gpu_type
   - bc_email_on_started
 attributes:
   commands:
@@ -53,17 +53,6 @@ attributes:
     min: 128
     max: 1024000
     step: 128
-  gpu_type:
-    widget: "select"
-    label: "GPU Type"
-    help: |
-      Make and model of GPU(s) to request
-    options:
-      - [ "Any", "Any" ]
-      - [ "Nvidia Geforce 2080Ti", "geforce_rtx_2080_ti" ]
-      - [ "Nvidia Geforce 1080Ti", "geforce_gtx_1080_ti" ]
-      - [ "Nvidia Tesla V100", "v100" ]
-      - [ "Nvidia Tesla A100", "a100" ]
   num_gpus:
     widget: "number_field"
     label: "Number of GPUs"
@@ -73,12 +62,18 @@ attributes:
     min: 0
     max: 10
     step: 1
+  slurm_account:
+    label: "Account"
+    help: |
+      Slurm [Account] to launch Jupyter job on
+
+      [Account]: https:///public/doc/#/batch-compute?id=partitions-amp-accounts
   slurm_partition:
     label: "Partition"
     help: |
       Slurm [Partition] to launch Jupyter job on
 
-      [Partition]: https://s3df.slac.stanford.edu/public/doc/#/batch-compute?id=s3df-partitions
+      [Partition]: https:///public/doc/#/batch-compute?id=partitions-amp-accounts
     value: "roma"
   jupyter_image_group:
     widget: "select"

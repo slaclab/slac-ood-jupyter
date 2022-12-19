@@ -74,7 +74,11 @@ attributes:
       Slurm [Partition] to launch Jupyter job on
 
       [Partition]: https:///public/doc/#/batch-compute?id=partitions-amp-accounts
-    value: "roma"
+    widget: "select"
+    options:
+      - roma
+      - milano
+      - ampere
   jupyter_image_group:
     widget: "select"
     label: "Jupyter Image"

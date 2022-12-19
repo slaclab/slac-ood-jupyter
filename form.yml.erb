@@ -6,7 +6,8 @@ form:
   - commands
   - use_lab
   - use_core_mode
-  - cluster
+  - cluster_group
+  - cluster # filtered by above
   - slurm_account
   - slurm_partition
   - bc_num_hours
@@ -79,6 +80,15 @@ attributes:
       - roma
       - milano
       - ampere
+  cluster_group:
+    widget: "select"
+    label: "Run on cluster type"
+    options:
+      - Interactive
+      - Batch
+  cluster_name:
+    widget: "select"
+    options: []
   jupyter_image_group:
     widget: "select"
     label: "Jupyter Image"

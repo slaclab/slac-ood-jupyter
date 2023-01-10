@@ -2,11 +2,6 @@
 <% 
   gpus = num_gpus.blank? ? 0 : num_gpus.to_i
 %>
-<% if gpus > 0 and gpu_type != "Any" %>
-  <% gpu_str = gpu_type + ':' + gpus.to_s %>
-<% else %>
-  <% gpu_str = gpus.to_s %>
-<% end %>
 batch_connect:
   template: "basic"
 script:
@@ -16,4 +11,4 @@ script:
     - "-N1"
     - "-c<%= num_cores %>"
     - "--mem=<% if mem == "" %>1024<% else %><%= mem %><% end %>"
-    <% if gpus > 0 %>- "--gpus=<%= gpu_str %>"<% end %>
+    <% if gpus > 0 %>- "--gpus=<%= gpus.to_s %>"<% end %>

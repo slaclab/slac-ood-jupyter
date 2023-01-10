@@ -208,9 +208,32 @@ function set_core_mode_handler() {
   $('#batch_connect_session_context_use_lab').change( core_mode_handler );
 }
 
+// dropdown for cluster type
+function set_cluster_group_handler() {
+  let type = $('#batch_connect_session_context_cluster_group option:selected').text();
+  console.log("filter on cluster type " + type);
+  $('#batch_connect_session_context_cluster_group').change( set_cluster_group_handler );
 
-// if the cluster is interactive, then ignore a bunch of batch fields
-function set_cluster_handler() {
+  // hide header for cluster
+  console.log( $('#batch_connect_session_context_cluster').siblings().hide() );
+
+  // hide all cluster_name's that do not match selected type
+  let initial = true;
+  $('#batch_connect_session_context_cluster option').each( function(){
+    //console.log( ' filtering item: ', this.text );
+    if( this.text.includes( type.toLowerCase() ) ){
+      //console.log('  showing');
+      $(this).show();
+      // if first one in list, select it to refresh
+      if( initial ){ $(this).prop('selected', true); initial = false; }
+    } else {
+      //console.log('  hiding');
+      $(this).hide();
+    }
+    console.log(this.text);
+    $(this).attr( 'label', this.text.replace( '_' + type.toLowerCase(), '' ) );
+  });
+
   let cluster = $('#batch_connect_session_context_cluster option:selected').text();
   let batch = cluster.includes("batch");
   console.log("cluster", cluster, "is batch?", batch);
@@ -219,8 +242,9 @@ function set_cluster_handler() {
   toggle_visibility_of_form_group( "#batch_connect_session_context_num_cores", batch );
   toggle_visibility_of_form_group( "#batch_connect_session_context_mem", batch );
   toggle_visibility_of_form_group( "#batch_connect_session_context_num_gpus", batch );
-  $('#batch_connect_session_context_cluster').change( set_cluster_handler );
+
 }
+
 
 /**
  * Main
@@ -237,7 +261,7 @@ set_jupyter_image_change_handler();
 set_gpu_change_handler();
 set_core_mode_handler();
 
-set_cluster_handler();
+set_cluster_group_handler();
 
 // Hide elements
 $('div').find("label[for='batch_connect_session_context_jupyter_image']").hide();

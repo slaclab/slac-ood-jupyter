@@ -6,7 +6,8 @@ form:
   - commands
   - use_lab
   - use_core_mode
-  - cluster
+  - cluster_group
+  - cluster # filtered by above
   - slurm_account
   - slurm_partition
   - bc_num_hours
@@ -74,12 +75,26 @@ attributes:
       Slurm [Partition] to launch Jupyter job on
 
       [Partition]: https:///public/doc/#/batch-compute?id=partitions-amp-accounts
-    value: "roma"
+    widget: "select"
+    options:
+      - roma
+      - milano
+      - ampere
+  cluster_group:
+    widget: "select"
+    label: "Run on cluster type"
+    options:
+      - Interactive
+      - Batch
+  cluster_name:
+    widget: "select"
+    options: []
   jupyter_image_group:
     widget: "select"
     label: "Jupyter Image"
     options:
       - slac
+      - LCLS
       - supercdms
       - atlas
       - rubin
@@ -98,25 +113,68 @@ attributes:
               export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/group/ml/software/images/slac-ml/20211101.0/slac-ml@20211101.0.sif
               function jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch/,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@; }
       -
+        - LCLS/ana-4.0.45
+        - |
+              export HDF5_USE_FILE_LOCKING=FALSE
+              export SIT_ROOT=/sdf/group/lcls/ds/ana/
+              export SIT_ARCH=x86_64-rhel7-gcc48-opt
+              export SIT_PSDM_DATA=/sdf/data/lcls/ds/
+              export OPENBLAS_NUM_THREADS=1
+              export CONDA_PREFIX=/sdf/group/lcls/ds/ana/sw/conda1/inst/
+              export PATH=${CONDA_PREFIX}/bin/:$PATH
+              source ${CONDA_PREFIX}/etc/profile.d/conda.sh
+              export SIT_DATA=/sdf/group/lcls/ds/ana/sw/conda1/inst/envs/ana-4.0.45/data:/sdf/group/lcls/ds/ana/data/
+              conda activate ana-4.0.45
+      -
+        - LCLS/ana-4.0.47-py3
+        - |
+              export HDF5_USE_FILE_LOCKING=FALSE
+              export SIT_ROOT=/sdf/group/lcls/ds/ana/
+              export SIT_ARCH=x86_64-rhel7-gcc48-opt
+              export SIT_PSDM_DATA=/sdf/data/lcls/ds/
+              export OPENBLAS_NUM_THREADS=1
+              export CONDA_PREFIX=/sdf/group/lcls/ds/ana/sw/conda1/inst/
+              export PATH=${CONDA_PREFIX}/bin/:$PATH
+              source ${CONDA_PREFIX}/etc/profile.d/conda.sh
+              export SIT_DATA=/sdf/group/lcls/ds/ana/sw/conda1/inst/envs/ana-4.0.47-py3/data:/sdf/group/lcls/ds/ana/data/
+              conda activate ana-4.0.47-py3
+      -
+        - LCLS/ps-4.5.23
+        - |
+              source /sdf/group/lcls/ds/ana/sw/conda2/inst/etc/profile.d/conda.sh
+              export CONDA_ENVS_DIRS=/cds/sw/ds/ana/conda2/inst/envs/
+              conda activate ps-4.5.23
+              RELDIR="$( cd "$( dirname $(readlink -f "${BASH_SOURCE[0]}") )" && pwd )"
+              export PATH=$RELDIR/install/bin:${PATH}
+              pyver=$(python -c "import sys; print(str(sys.version_info.major)+'.'+str(sys.version_info.minor))")
+              export PYTHONPATH=$RELDIR/install/lib/python$pyver/site-packages
+              export TESTRELDIR=$RELDIR/install
+              export PROCMGR_EXPORT=RDMAV_FORK_SAFE=1,RDMAV_HUGEPAGES_SAFE=1
+              export MANPATH=$CONDA_PREFIX/share/man${MANPATH:+:${MANPATH}}
+      -
         - slac/SSAI
         - |
               export SINGULARITY_IMAGE_PATH=/fs/ddn//sdf/group/ml/datasets/images/shared.sif
-              export PYTHONPATH=\"\"\nfunction jupyter() { singularity exec --nv -B /sdf,/fs,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@ ;}
+              export PYTHONPATH=\"\"
+              function jupyter() { singularity exec --nv -B /sdf,/fs,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@ ;}
       -
         - supercdms/allkernels
         - |
-              ls /cvmfs/cdms.opensciencegrid.org/\nexport PYTHONUSERBASE=~/.local
+              ls /cvmfs/cdms.opensciencegrid.org
+              export PYTHONUSERBASE=~/.local
               source /sdf/group/supercdms/software/packages/jupyter/venv/bin/activate
       -
         - atlas/20200502
         - |
               ls /cvmfs/oasis.opensciencegrid.org /cvmfs/atlas.cern.ch /cvmfs/atlas-condb.cern.ch /cvmfs/atlas-nightlies.cern.ch /cvmfs/sft.cern.ch /cvmfs/unpacked.cern.ch /cvmfs/atlas.sdcc.bnl.gov >/dev/null
-              export SINGULARITY_IMAGE_PATH=/cvmfs/atlas.sdcc.bnl.gov/jupyter/t3s/slac/singularity/atlas-slac.sif\nfunction jupyter() { singularity exec --nv -B /cvmfs,/sdf,/fs,/sdf/scratch/,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@; }
+              export SINGULARITY_IMAGE_PATH=/cvmfs/atlas.sdcc.bnl.gov/jupyter/t3s/slac/singularity/atlas-slac.sif
+              function jupyter() { singularity exec --nv -B /cvmfs,/sdf,/fs,/sdf/scratch/,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@; }
       -
         - atlas/20210403
         - |
               ls /cvmfs/oasis.opensciencegrid.org /cvmfs/atlas.cern.ch /cvmfs/atlas-condb.cern.ch /cvmfs/atlas-nightlies.cern.ch /cvmfs/sft.cern.ch /cvmfs/unpacked.cern.ch /cvmfs/atlas.sdcc.bnl.gov >/dev/null
-              export T3repo=/cvmfs/atlas.sdcc.bnl.gov/jupyter/t3s\nexport SINGULARITY_IMAGE_PATH=${T3repo}/slac/singularity/jupyter-conda.20210403.sif
+              export T3repo=/cvmfs/atlas.sdcc.bnl.gov/jupyter/t3s
+              export SINGULARITY_IMAGE_PATH=${T3repo}/slac/singularity/jupyter-conda.20210403.sif
               function jupyter() { singularity exec --nv -B /cvmfs,/sdf,/fs,/lscratch,/etc/slurm,/opt/slurm,/var/spool/slurmd,/run/slurm/conf/slurm.conf,/var/run/munge,/bin/modulecmd -B ${T3repo}/slac/singularity/99-zatlas.sh:/.singularity.d/env/99-zatlas.sh ${SINGULARITY_IMAGE_PATH} jupyter $@; }
       -
         - atlas/20200714-with-slurm-cli
@@ -178,14 +236,14 @@ attributes:
               export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/group/nexo/software/chroma/Chroma_latest.sif
               function jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@; }
       -
-        - Custom/Singularity Image...
+        - Custom/Apptainer Image...
         - |
-              export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/sw/ml/slac-ml/20200211.0/slac-jupyterlab@20200211.0.sif
-              function jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@; }
+              export APPTAINER_IMAGE_PATH=<path to apptainer image>
+              function jupyter() { apptainer exec --nv -B /sdf,/fs,/sdf/scratch,/lscratch ${APPTAINER_IMAGE_PATH} jupyter $@; }
       -
         - Custom/Conda Environment...
         - |
-              export CONDA_PREFIX=<path to conda install>3
+              export CONDA_PREFIX=<path to conda install>
               export PATH=${CONDA_PREFIX}/bin/:$PATH
               source ${CONDA_PREFIX}/etc/profile.d/conda.sh
               conda env list

@@ -113,7 +113,7 @@ attributes:
               export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/group/ml/software/images/slac-ml/20211101.0/slac-ml@20211101.0.sif
               function jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch/,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@; }
       -
-        - LCLS/ana-4.0.45
+        - LCLS/LCLS1-pt2
         - |
               export HDF5_USE_FILE_LOCKING=FALSE
               export SIT_ROOT=/sdf/group/lcls/ds/ana/
@@ -126,7 +126,7 @@ attributes:
               export SIT_DATA=/sdf/group/lcls/ds/ana/sw/conda1/inst/envs/ana-4.0.45/data:/sdf/group/lcls/ds/ana/data/
               conda activate ana-4.0.45
       -
-        - LCLS/ana-4.0.47-py3
+        - LCLS/LCLS-py3
         - |
               export HDF5_USE_FILE_LOCKING=FALSE
               export SIT_ROOT=/sdf/group/lcls/ds/ana/
@@ -139,7 +139,7 @@ attributes:
               export SIT_DATA=/sdf/group/lcls/ds/ana/sw/conda1/inst/envs/ana-4.0.47-py3/data:/sdf/group/lcls/ds/ana/data/
               conda activate ana-4.0.47-py3
       -
-        - LCLS/ps-4.5.23
+        - LCLS/LCLS2
         - |
               source /sdf/group/lcls/ds/ana/sw/conda2/inst/etc/profile.d/conda.sh
               export CONDA_ENVS_DIRS=/cds/sw/ds/ana/conda2/inst/envs/

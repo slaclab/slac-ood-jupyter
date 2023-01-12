@@ -113,7 +113,7 @@ attributes:
               export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/group/ml/software/images/slac-ml/20211101.0/slac-ml@20211101.0.sif
               function jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch/,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@; }
       -
-        - LCLS/LCLS1-pt2
+        - LCLS/LCLS1-py2
         - |
               export HDF5_USE_FILE_LOCKING=FALSE
               export SIT_ROOT=/sdf/group/lcls/ds/ana/

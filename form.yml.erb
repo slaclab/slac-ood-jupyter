@@ -126,7 +126,7 @@ attributes:
               export SIT_DATA=/sdf/group/lcls/ds/ana/sw/conda1/inst/envs/ana-4.0.45/data:/sdf/group/lcls/ds/ana/data/
               conda activate ana-4.0.45
       -
-        - LCLS/LCLS-py3
+        - LCLS/LCLS1-py3
         - |
               export HDF5_USE_FILE_LOCKING=FALSE
               export SIT_ROOT=/sdf/group/lcls/ds/ana/
@@ -141,16 +141,7 @@ attributes:
       -
         - LCLS/LCLS2
         - |
-              source /sdf/group/lcls/ds/ana/sw/conda2/inst/etc/profile.d/conda.sh
-              export CONDA_ENVS_DIRS=/cds/sw/ds/ana/conda2/inst/envs/
-              conda activate ps-4.5.23
-              RELDIR="$( cd "$( dirname $(readlink -f "${BASH_SOURCE[0]}") )" && pwd )"
-              export PATH=$RELDIR/install/bin:${PATH}
-              pyver=$(python -c "import sys; print(str(sys.version_info.major)+'.'+str(sys.version_info.minor))")
-              export PYTHONPATH=$RELDIR/install/lib/python$pyver/site-packages
-              export TESTRELDIR=$RELDIR/install
-              export PROCMGR_EXPORT=RDMAV_FORK_SAFE=1,RDMAV_HUGEPAGES_SAFE=1
-              export MANPATH=$CONDA_PREFIX/share/man${MANPATH:+:${MANPATH}}
+              source /cds/sw/ds/ana/conda2/manage/bin/psconda.sh
       -
         - slac/SSAI
         - |

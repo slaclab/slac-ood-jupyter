@@ -176,6 +176,13 @@ attributes:
               function jupyter() { singularity exec --nv -B /cvmfs,/sdf,/fs,/lscratch,/etc/slurm,/opt/slurm,/var/spool/slurmd,/run/slurm/conf/slurm.conf,/var/run/munge,/bin/modulecmd -B ${T3repo}/slac/singularity/99-zatlas.sh:/.singularity.d/env/99-zatlas.sh ${SINGULARITY_IMAGE_PATH} jupyter $@; }
               # -B /usr/lib64/libmunge.so.2,/usr/lib64/tcl8.5,/usr/lib64/libtcl8.5.so,/usr/share/tcl8.5,/usr/lib64/libexpect5.45.so
       -
+        - atlas/develop
+        - |
+              ls /cvmfs/unpacked.cern.ch > /dev/null
+              export SINGULARITY_IMAGE_PATH=/cvmfs/unpacked.cern.ch/registry.hub.docker.com/yesw2000/ml-base:centos7-python38
+              export PYTHONPATH=\"\"
+              function jupyter() { singularity exec --nv -B /cvmfs,/sdf,/fs,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@ ; }
+      -
         - neutrino-jupyter/develop
         - |
               export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/group/neutrino/images/develop.sif

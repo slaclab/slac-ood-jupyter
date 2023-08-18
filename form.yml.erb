@@ -14,6 +14,7 @@ form:
   - num_cores
   - mem
   - num_gpus
+  - sbatch_options
   - bc_email_on_started
 attributes:
   commands:
@@ -69,6 +70,10 @@ attributes:
       Slurm [Account] to launch Jupyter job on
 
       [Account]: https:///public/doc/#/batch-compute?id=partitions-amp-accounts
+  sbatch_options:
+    label: "Options"
+    help: |
+      String of additional sbatch options
   slurm_partition:
     label: "Partition"
     help: |

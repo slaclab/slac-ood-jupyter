@@ -242,6 +242,7 @@ function set_cluster_group_handler() {
   toggle_visibility_of_form_group( "#batch_connect_session_context_num_cores", batch );
   toggle_visibility_of_form_group( "#batch_connect_session_context_mem", batch );
   toggle_visibility_of_form_group( "#batch_connect_session_context_num_gpus", batch );
+  toggle_visibility_of_form_group( "#batch_connect_session_context_sbatch_options", batch );
 
 }
 

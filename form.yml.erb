@@ -14,6 +14,7 @@ form:
   - num_cores
   - mem
   - num_gpus
+  - slurm_reservation
   - bc_email_on_started
 attributes:
   commands:
@@ -69,6 +70,10 @@ attributes:
       Slurm [Account] to launch Jupyter job on
 
       [Account]: https:///public/doc/#/batch-compute?id=partitions-amp-accounts
+  slurm_reservation:
+    label: "Slurm Reservation"
+    help: |
+      Optional name of slurm reservation to use
   slurm_partition:
     label: "Partition"
     help: |

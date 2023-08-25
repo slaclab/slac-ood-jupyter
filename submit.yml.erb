@@ -7,7 +7,9 @@ batch_connect:
 script:
   native:
     - "-p<%= slurm_partition %>"
-    - "-A<%= slurm_partition %>"
+    - "-A<%= slurm_account %>"
+#    - "--reservation<%= slurm_reservation %>"
+    <% if slurm_reservation == "" %><% else %>- "--reservation=<%= slurm_reservation %>"<% end %>
     - "-N1"
     - "-c<%= num_cores %>"
     - "--mem=<% if mem == "" %>1024<% else %><%= mem %><% end %>"

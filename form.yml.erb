@@ -66,6 +66,7 @@ attributes:
     step: 1
   slurm_account:
     label: "Account"
+    pattern: "^[a-zA-Z0-9:]*$"
     help: |
       Slurm [Account] to launch Jupyter job on
 
@@ -74,6 +75,7 @@ attributes:
     label: "Slurm Reservation"
     help: |
       Optional name of slurm reservation to use
+    pattern: "^[a-zA-Z0-9:]*$"
   slurm_partition:
     label: "Partition"
     help: |

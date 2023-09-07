@@ -118,19 +118,6 @@ attributes:
               export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/group/ml/software/images/slac-ml/20211101.0/slac-ml@20211101.0.sif
               function jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch/,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@; }
       -
-        - LCLS/LCLS1-py2
-        - |
-              export HDF5_USE_FILE_LOCKING=FALSE
-              export SIT_ROOT=/sdf/group/lcls/ds/ana/
-              export SIT_ARCH=x86_64-rhel7-gcc48-opt
-              export SIT_PSDM_DATA=/sdf/data/lcls/ds/
-              export OPENBLAS_NUM_THREADS=1
-              export CONDA_PREFIX=/sdf/group/lcls/ds/ana/sw/conda1/inst/
-              export PATH=${CONDA_PREFIX}/bin/:$PATH
-              source ${CONDA_PREFIX}/etc/profile.d/conda.sh
-              export SIT_DATA=/sdf/group/lcls/ds/ana/sw/conda1/inst/envs/ana-4.0.45/data:/sdf/group/lcls/ds/ana/data/
-              conda activate ana-4.0.45
-      -
         - LCLS/LCLS1-py3
         - |
               export HDF5_USE_FILE_LOCKING=FALSE

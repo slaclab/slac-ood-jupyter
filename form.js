@@ -127,9 +127,10 @@ function jupyter_image_group_change_handler() {
 function jupyter_image_change_handler() {
 
   let selected = $('#batch_connect_session_context_jupyter_image').find(':selected');
-  let version = selected[0].text;
-  let commands = selected[0].value;
-
+  //let version = selected[0].text;
+  //let commands = selected[0].value;
+  let version = selected.split(":")[0];
+  let commands = selected.split(":")[1];
   console.log( version );
   // console.log( commands );
   // console.log( $('#batch_connect_session_context_commands').text() );

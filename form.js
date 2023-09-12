@@ -116,7 +116,9 @@ function jupyter_image_group_change_handler() {
       if( initial ){ $(this).prop('selected', true); initial = false; }
     } else {
       console.log('  hiding');
-      $(this).hide();
+      setTimeout(function() {
+        $(this).hide();
+      }.bind(this), 10);
     }
     $(this).attr( 'label', this.text.replace( group + '/', '' ) );
   });

@@ -115,7 +115,7 @@ function jupyter_image_group_change_handler() {
       // if first one in list, select it to refresh
       if( initial ){ $(this).prop('selected', true); initial = false; }
     } else {
-      // console.log('  hiding');
+      console.log('  hiding');
       $(this).hide();
     }
     $(this).attr( 'label', this.text.replace( group + '/', '' ) );

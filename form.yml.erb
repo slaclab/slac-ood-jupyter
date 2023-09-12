@@ -116,8 +116,8 @@ attributes:
     help: |
       Which Jupyter image to run
     options:
-      - [ "slac/20211101.0", "export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/group/ml/software/images/slac-ml/20211101.0/slac-ml@20211101.0.sif
-              function jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch/,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@; }" ]
+      - "slac/20211101.0: export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/group/ml/software/images/slac-ml/20211101.0/slac-ml@20211101.0.sif
+              function jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch/,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@; }"
       -
         - LCLS/ana-4.0.45
         - |

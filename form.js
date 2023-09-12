@@ -264,4 +264,4 @@ set_core_mode_handler();
 set_cluster_group_handler();
 
 // Hide elements
-$('div').find("label[for='batch_connect_session_context_jupyter_image']").hide();
+//$('div').find("label[for='batch_connect_session_context_jupyter_image']").hide();

@@ -13,4 +13,4 @@ script:
     - "-c<%= num_cores %>"
     - "--mem=<% if mem == "" %>1024<% else %><%= mem %><% end %>"
     <% if gpus > 0 %>- "--gpus=<%= gpus.to_s %>"<% end %>
-    - "--job-name=jupyter/<%= jupyter_image %>/version"
+    - "--job-name=jupyter/<%= context.jupyter_image.label %>/version"

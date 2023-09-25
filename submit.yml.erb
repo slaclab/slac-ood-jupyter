@@ -11,5 +11,5 @@ script:
     <% if slurm_reservation == "" %><% else %>- "--reservation=<%= slurm_reservation.gsub(/[^a-zA-Z0-9:]/, '') %>"<% end %>
     - "-N1"
     - "-c<%= num_cores %>"
-    - "--mem=<% if mem == nil %>1024<% else %><%= mem %><% end %>"
+    - "--mem=<% if mem == "" %>1024<% else %><%= mem %><% end %>"
     <% if gpus > 0 %>- "--gpus=<%= gpus.to_s %>"<% end %>

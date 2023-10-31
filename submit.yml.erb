@@ -7,7 +7,7 @@ batch_connect:
 script:
   native:
     - "-p<%= slurm_partition %>"
-    <% if slurm_account == "" %><% else %>- "-A<%= slurm_account.gsub(/[^a-zA-Z0-9:]/, '')  %>"<% end %>
+    <% if slurm_account == "" %><% else %>- "-A<%= slurm_account.gsub(/[^a-zA-Z0-9:_-]/, '')  %>"<% end %>
     <% if slurm_reservation == "" %><% else %>- "--reservation=<%= slurm_reservation.gsub(/[^a-zA-Z0-9:]/, '') %>"<% end %>
     - "-N1"
     - "-c<%= num_cores %>"

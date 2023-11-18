@@ -128,6 +128,12 @@ attributes:
         - |
               source /sdf/group/lcls/ds/ana/sw/conda2/manage/bin/psconda.sh
       -
+        - LCLS/HDF5
+        - |
+              source /sdf/group/lcls/ds/ana/sw/conda2/manage/bin/psconda.sh
+              conda deactivate
+              conda activate h5-1.0.1
+      -
         - slac/SSAI
         - |
               export SINGULARITY_IMAGE_PATH=/fs/ddn//sdf/group/ml/datasets/images/shared.sif

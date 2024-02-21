@@ -144,25 +144,26 @@ attributes:
               export PYTHONUSERBASE=~/.local
               source /sdf/group/supercdms/software/packages/jupyter/venv/bin/activate
       -
-        - atlas/20200502
+        - atlas/20200502-centos7
         - |
               ls /cvmfs/oasis.opensciencegrid.org /cvmfs/atlas.cern.ch /cvmfs/atlas-condb.cern.ch /cvmfs/atlas-nightlies.cern.ch /cvmfs/sft.cern.ch /cvmfs/unpacked.cern.ch /cvmfs/atlas.sdcc.bnl.gov >/dev/null
               export SINGULARITY_IMAGE_PATH=/cvmfs/atlas.sdcc.bnl.gov/jupyter/t3s/slac/singularity/atlas-slac.sif
               function jupyter() { singularity exec --nv -B /cvmfs,/sdf,/fs,/sdf/scratch/,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@; }
       -
-        - atlas/20210403
+        - atlas/20210403-centos7
         - |
               ls /cvmfs/oasis.opensciencegrid.org /cvmfs/atlas.cern.ch /cvmfs/atlas-condb.cern.ch /cvmfs/atlas-nightlies.cern.ch /cvmfs/sft.cern.ch /cvmfs/unpacked.cern.ch /cvmfs/atlas.sdcc.bnl.gov >/dev/null
               export T3repo=/cvmfs/atlas.sdcc.bnl.gov/jupyter/t3s
               export SINGULARITY_IMAGE_PATH=${T3repo}/slac/singularity/jupyter-conda.20210403.sif
-              function jupyter() { singularity exec --nv -B /cvmfs,/sdf,/fs,/lscratch,/etc/slurm,/opt/slurm,/var/spool/slurmd,/run/slurm/conf/slurm.conf,/var/run/munge,/bin/modulecmd -B ${T3repo}/slac/singularity/99-zatlas.sh:/.singularity.d/env/99-zatlas.sh ${SINGULARITY_IMAGE_PATH} jupyter $@; }
+              function jupyter() { singularity exec --nv -B /cvmfs,/sdf,/fs,/lscratch,/var/run/munge -B ${T3repo}/slac/singularity/99-zatlas.sh:/.singularity.d/env/99-zatlas.sh ${SINGULARITY_IMAGE_PATH} jupyter $@; }
       -
-        - atlas/20200714-with-slurm-cli
+        - atlas/20200714-centos7
         - |
               ls /cvmfs/oasis.opensciencegrid.org /cvmfs/atlas.cern.ch /cvmfs/atlas-condb.cern.ch /cvmfs/atlas-nightlies.cern.ch /cvmfs/sft.cern.ch /cvmfs/unpacked.cern.ch /cvmfs/atlas.sdcc.bnl.gov >/dev/null
               export T3repo=/cvmfs/atlas.sdcc.bnl.gov/jupyter/t3s
               export SINGULARITY_IMAGE_PATH=${T3repo}/slac/singularity/atlas-slac-w-slurm-cli-20200714.sif
-              function jupyter() { singularity exec --nv -B /cvmfs,/sdf,/fs,/lscratch,/etc/slurm,/opt/slurm,/var/spool/slurmd,/run/slurm/conf/slurm.conf,/var/run/munge,/bin/modulecmd -B ${T3repo}/slac/singularity/99-zatlas.sh:/.singularity.d/env/99-zatlas.sh ${SINGULARITY_IMAGE_PATH} jupyter $@; }
+              function jupyter() { singularity exec --nv -B /cvmfs,/sdf,/fs,/lscratch,/var/run/munge -B ${T3repo}/slac/singularity/99-zatlas.sh:/.singularity.d/env/99-zatlas.sh ${SINGULARITY_IMAGE_PATH} jupyter $@; }
+              # -B /etc/slurm,/opt/slurm,/var/spool/slurmd,/run/slurm/conf/slurm.conf,
               # -B /usr/lib64/libmunge.so.2,/usr/lib64/tcl8.5,/usr/lib64/libtcl8.5.so,/usr/share/tcl8.5,/usr/lib64/libexpect5.45.so
       -
         - atlas/develop

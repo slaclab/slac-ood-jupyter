@@ -176,43 +176,55 @@ attributes:
       -
         - neutrino-jupyter/develop
         - |
-              export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/group/neutrino/images/develop.sif
+              export SINGULARITY_IMAGE_PATH=/sdf/group/neutrino/images/develop.sif
               export PYTHONPATH=\"\"
               function jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@ ; }
       -
         - neutrino-jupyter/latest
         - |
-              export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/group/neutrino/images/latest.sif
+              export SINGULARITY_IMAGE_PATH=/sdf/group/neutrino/images/latest.sif
+              export PYTHONPATH=\"\"
+              function jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@ ; }
+      -
+        - neutrino-jupyter/2024-03-08
+        - |
+              export SINGULARITY_IMAGE_PATH=/sdf/group/neutrino/images/larcv2_ub20.04-cuda12.1-pytorch2.2.1-larndsim.sif
+              export PYTHONPATH=\"\"
+              function jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@ ; }
+      -
+        - neutrino-jupyter/2023-11-07
+        - |
+              export SINGULARITY_IMAGE_PATH=/sdf/group/neutrino/images/larcv2_ub20.04-cuda11.6-pytorch1.13-larndsim-2023-11-07.sif
               export PYTHONPATH=\"\"
               function jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@ ; }
       -
         - neutrino-jupyter/2021-11-03
         - |
-              export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/group/neutrino/images/larcv2_ub20.04-cuda11.3-cudnn8-pytorch1.10.0-larndsim.sif
+              export SINGULARITY_IMAGE_PATH=/sdf/group/neutrino/images/larcv2_ub20.04-cuda11.3-cudnn8-pytorch1.10.0-larndsim-2022-11-03.sif
               export PYTHONPATH=\"\"
               function jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@ ; }
       -
         - neutrino-jupyter/2021-08-03
         - |
-              export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/group/neutrino/images/larcv2_ub20.04-cuda11.1-cudnn8-pytorch1.9.0-larndsim.sif
+              export SINGULARITY_IMAGE_PATH=/sdf/group/neutrino/images/larcv2_ub20.04-cuda11.1-cudnn8-pytorch1.9.0-larndsim.sif
               export PYTHONPATH=\"\"
               function jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@ ; }
       -
         - neutrino-jupyter/2021-06-10
         - |
-              export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/group/neutrino/images/larcv2_ub20.04-cuda11.0-pytorch1.7.1-larndsim.sif
+              export SINGULARITY_IMAGE_PATH=/sdf/group/neutrino/images/larcv2_ub20.04-cuda11.0-pytorch1.7.1-larndsim.sif
               export PYTHONPATH=\"\"
               function jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@ ; }
       -
         - neutrino-jupyter/2021-06-05
         - |
-              export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/group/neutrino/images/larcv2_ub20.04-cuda11.0-pytorch1.7.1-edepsim.sif
+              export SINGULARITY_IMAGE_PATH=/sdf/group/neutrino/images/larcv2_ub20.04-cuda11.0-pytorch1.7.1-edepsim.sif
               export PYTHONPATH=\"\"
               function jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@ ; }
       -
         - neutrino-jupyter/2021-01-27
         - |
-              export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/group/neutrino/images/larcv2_ub18.04-cuda10.2-pytorch1.7.1-edepsim.sif
+              export SINGULARITY_IMAGE_PATH=/sdf/group/neutrino/images/larcv2_ub18.04-cuda10.2-pytorch1.7.1-edepsim.sif
               export PYTHONPATH=\"\"
               function jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@ ; }
       -

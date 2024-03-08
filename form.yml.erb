@@ -106,6 +106,7 @@ attributes:
       - [ "lsst/r18_1_0",  "module load lsst/r18_1_0" ]
       - [ "lsst/r19_0_0",  "module load lsst/r19_0_0" ]
       - [ "nexo/chroma", "export SINGULARITY_IMAGE_PATH=/sdf/group/nexo/software/chroma/Chroma_latest.sif\nfunction jupyter() { singularity exec --nv -B /sdf,/gpfs,/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@; }" ]
+      - [ "eed/k2eg", "export SINGULARITY_IMAGE_PATH=/sdf/sw/k2eg/images/k2eg-jupyter.sif\nfunction jupyter() { singularity exec --nv -B /sdf,/gpfs,/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@; }" ]
       - [ "Custom Singularity Image...", "export SINGULARITY_IMAGE_PATH=/sdf/sw/ml/slac-ml/20200211.0/slac-jupyterlab@20200211.0.sif\nfunction jupyter() { singularity exec --nv -B /sdf,/gpfs,/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@; }
 
 " ]

@@ -122,6 +122,13 @@ function jupyter_image_group_change_handler() {
   });
   jupyter_image_change_handler();
 
+  // Set dynamic cluster default based on Jupyter Image name
+  $('#batch_connect_session_context_cluster').each( function() {
+    if( this.text.startsWith( group ) ){
+       $(this).prop('selected', true);
+    }
+  }
+  set_cluster_group_handler();
 }
 
 function jupyter_image_change_handler() {

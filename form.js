@@ -152,6 +152,7 @@ function jupyter_image_change_handler() {
 
   // console.log("selected " + text + " -> " + commands);
   $('#batch_connect_session_context_commands')[0].readOnly = commands_readonly;
+  set_cluster_group_handler()
 
 }
 
@@ -208,10 +209,11 @@ function set_core_mode_handler() {
   $('#batch_connect_session_context_use_lab').change( core_mode_handler );
 }
 
+
 // dropdown for cluster type
 function set_cluster_group_handler() {
-  let type = $('#batch_connect_session_context_cluster_group option:selected').text();
-  console.log("filter on cluster type " + type);
+  let cluster_type = $('#batch_connect_session_context_cluster_group option:selected').text();
+  console.log("filter on cluster type " + cluster_type);
   $('#batch_connect_session_context_cluster_group').change( set_cluster_group_handler );
 
   // hide header for cluster
@@ -221,7 +223,7 @@ function set_cluster_group_handler() {
   let initial = true;
   $('#batch_connect_session_context_cluster option').each( function(){
     //console.log( ' filtering item: ', this.text );
-    if( this.text.includes( type.toLowerCase() ) ){
+    if( this.text.includes( cluster_type.toLowerCase() ) ){
       //console.log('  showing');
       $(this).show();
       // if first one in list, select it to refresh
@@ -231,8 +233,29 @@ function set_cluster_group_handler() {
       $(this).hide();
     }
     console.log(this.text);
-    $(this).attr( 'label', this.text.replace( '_' + type.toLowerCase(), '' ) );
+    $(this).attr( 'label', this.text.replace( '_' + cluster_type.toLowerCase(), '' ) );
   });
+
+  // Set dynamic cluster default based on Jupyter Image name
+    let group = $('#batch_connect_session_context_jupyter_image_group').find(':selected')[0].text;
+  if( cluster_type == 'Interactive' ) {
+    switch( group ) {
+      case "LCLS":
+        $('#batch_connect_session_context_cluster').val("psana_interactive");
+        break;
+      case "supercdms":
+        $('#batch_connect_session_context_cluster').val("supercdms_interactive");
+        break;
+      case "rubin":
+        $('#batch_connect_session_context_cluster').val("rubin_interactive");
+        break;
+      case "neutrino":
+        $('#batch_connect_session_context_cluster').val("neutrino_interactive");
+        break;
+      default: 
+        $('#batch_connect_session_context_cluster').val("iana_interactive");
+    }
+  } 
 
   let cluster = $('#batch_connect_session_context_cluster option:selected').text();
   let batch = cluster.includes("batch");

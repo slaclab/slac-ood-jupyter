@@ -236,8 +236,19 @@ function set_cluster_group_handler() {
     $(this).attr( 'label', this.text.replace( '_' + cluster_type.toLowerCase(), '' ) );
   });
 
-  // Set dynamic cluster default based on Jupyter Image name
-    let group = $('#batch_connect_session_context_jupyter_image_group').find(':selected')[0].text;
+
+  let cluster = $('#batch_connect_session_context_cluster option:selected').text();
+  let batch = cluster.includes("batch");
+  console.log("cluster", cluster, "is batch?", batch);
+  toggle_visibility_of_form_group( "#batch_connect_session_context_slurm_account", batch );
+  toggle_visibility_of_form_group( "#batch_connect_session_context_slurm_partition", batch );
+  toggle_visibility_of_form_group( "#batch_connect_session_context_num_cores", batch );
+  toggle_visibility_of_form_group( "#batch_connect_session_context_mem", batch );
+  toggle_visibility_of_form_group( "#batch_connect_session_context_num_gpus", batch );
+  toggle_visibility_of_form_group( "#batch_connect_session_context_slurm_reservation", batch );
+
+  // Set dynamic cluster default based on Jupyter Image name (group selection)
+  let group = $('#batch_connect_session_context_jupyter_image_group').find(':selected')[0].text;
   if( cluster_type == 'Interactive' ) {
     switch( group ) {
       case "LCLS":
@@ -252,20 +263,52 @@ function set_cluster_group_handler() {
       case "neutrino":
         $('#batch_connect_session_context_cluster').val("neutrino_interactive");
         break;
-      default: 
+      default:
         $('#batch_connect_session_context_cluster').val("iana_interactive");
     }
-  } 
+  } else if( cluster_type == 'Batch' ) {
+      // Set Account defaults
+      if ( $('#batch_connect_session_context_slurm_account').val().includes(':default') ||
+           $('#batch_connect_session_context_slurm_account').val() == '' ) {
 
-  let cluster = $('#batch_connect_session_context_cluster option:selected').text();
-  let batch = cluster.includes("batch");
-  console.log("cluster", cluster, "is batch?", batch);
-  toggle_visibility_of_form_group( "#batch_connect_session_context_slurm_account", batch );
-  toggle_visibility_of_form_group( "#batch_connect_session_context_slurm_partition", batch );
-  toggle_visibility_of_form_group( "#batch_connect_session_context_num_cores", batch );
-  toggle_visibility_of_form_group( "#batch_connect_session_context_mem", batch );
-  toggle_visibility_of_form_group( "#batch_connect_session_context_num_gpus", batch );
-  toggle_visibility_of_form_group( "#batch_connect_session_context_slurm_reservation", batch );
+        switch( group ) {
+          case "LCLS":
+            $('#batch_connect_session_context_slurm_account').val("lcls:default");
+            break;
+          case "supercdms":
+            $('#batch_connect_session_context_slurm_account').val("supercdms:default");
+            break;
+          case "atlas":
+            $('#batch_connect_session_context_slurm_account').val("atlas:default");
+            break;
+          case "rubin":
+            $('#batch_connect_session_context_slurm_account').val("rubin:default");
+            break;
+          case "neutrino":
+            $('#batch_connect_session_context_slurm_account').val("neutrino:default");
+            break;
+          case "nexo":
+            $('#batch_connect_session_context_slurm_account').val("exo:default");
+            break;
+        }
+      // Set Partition default
+      if( $('#batch_connect_session_context_slurm_partition').val() == null ) {
+        $('#batch_connect_session_context_slurm_partition').val('milano');
+      }
+      // Set CPU cores default
+      if( $('#batch_connect_session_context_num_cores').val() == '' ) {
+        $('#batch_connect_session_context_num_cores').val('1');
+      }
+      // Set Memory allocation default
+      if( $('#batch_connect_session_context_mem').val() == '' ) {
+        $('#batch_connect_session_context_mem').val('2048');
+      }
+      // Set Num GPUs default
+      if( $('#batch_connect_session_context_num_gpus').val() == '' ) {
+        $('#batch_connect_session_context_num_gpus').val('0');
+      }
+    }
+  }
 }
 
 

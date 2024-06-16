@@ -106,6 +106,7 @@ attributes:
       - [ "lsst/r18_1_0",  "module load lsst/r18_1_0" ]
       - [ "lsst/r19_0_0",  "module load lsst/r19_0_0" ]
       - [ "nexo/chroma", "export SINGULARITY_IMAGE_PATH=/sdf/group/nexo/software/chroma/Chroma_latest.sif\nfunction jupyter() { singularity exec --nv -B /sdf,/gpfs,/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@; }" ]
+      - [ "Facet2-Impact_Bmad", "export APPTAINER_IMAGE_PATH=/sdf/group/facet/sanjeev/containers/impact-bmad_latest.sif; export NOTEBOOK_ROOT=$HOME/impact_bmad_container_notebooks; mkdir -p $HOME/impact_bmad_container_notebooks; function jupyter() { apptainer exec -B /usr,/sdf,/fs,/sdf/scratch,/lscratch ${APPTAINER_IMAGE_PATH} bash -c "mkdir -p ${NOTEBOOK_ROOT} && cp -rn /opt/notebooks/* ${NOTEBOOK_ROOT}/"; apptainer exec -B /usr,/sdf,/fs,/sdf/scratch,/lscratch ${APPTAINER_IMAGE_PATH} jupyter $@; }" ]
       - [ "Custom Singularity Image...", "export SINGULARITY_IMAGE_PATH=/sdf/sw/ml/slac-ml/20200211.0/slac-jupyterlab@20200211.0.sif\nfunction jupyter() { singularity exec --nv -B /sdf,/gpfs,/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@; }
 
 " ]

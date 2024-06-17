@@ -263,7 +263,7 @@ function set_cluster_group_handler() {
       case "neutrino":
         $('#batch_connect_session_context_cluster').val("neutrino_interactive");
         break;
-      default: 
+      default:
         $('#batch_connect_session_context_cluster').val("iana_interactive");
     }
   } else if( cluster_type == 'Batch' ) {
@@ -308,6 +308,7 @@ function set_cluster_group_handler() {
         $('#batch_connect_session_context_num_gpus').val('0');
       }
     }
+
   } 
 }
 

@@ -237,6 +237,19 @@ attributes:
               export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/group/nexo/software/chroma/Chroma_latest.sif
               function jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@; }
       -
+        - facet2/impact_bmad_sim
+        - |
+              # APPTAINER_IMAGE_PATH is a locally kept copy of slacact/impact-bmad (docker hub)
+              export APPTAINER_IMAGE_PATH=/sdf/group/facet/sanjeev/containers/impact-bmad_latest.sif
+              # you can change NOTEBOOK_ROOT to a custom path
+              export NOTEBOOK_ROOT=$HOME/impact_bmad_container_notebooks
+              mkdir -p $HOME/impact_bmad_container_notebooks
+              function jupyter() {
+              apptainer exec -B /usr,/sdf,/fs,/sdf/scratch,/lscratch ${APPTAINER_IMAGE_PATH} bash -c "
+                      mkdir -p ${NOTEBOOK_ROOT} &&
+                      cp -rn /opt/notebooks/* ${NOTEBOOK_ROOT}/";
+                	apptainer exec -B /usr,/sdf,/fs,/sdf/scratch,/lscratch ${APPTAINER_IMAGE_PATH}  jupyter $@; }
+      -
         - Custom/Apptainer Image...
         - |
               export APPTAINER_IMAGE_PATH=<path to apptainer image>

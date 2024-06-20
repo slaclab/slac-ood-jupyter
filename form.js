@@ -308,7 +308,8 @@ function set_cluster_group_handler() {
         $('#batch_connect_session_context_num_gpus').val('0');
       }
     }
-  }
+
+  } 
 }
 
 

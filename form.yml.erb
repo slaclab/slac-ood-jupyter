@@ -251,6 +251,21 @@ attributes:
                       cp -rn /opt/notebooks/* ${NOTEBOOK_ROOT}/";
                 	apptainer exec -B /usr,/sdf,/fs,/sdf/scratch,/lscratch ${APPTAINER_IMAGE_PATH}  jupyter $@; }
       -
+         - facet2/impact_bmad_utility
+         - |
+                     
+              export APPTAINER_IMAGE_PATH=/sdf/group/facet/sanjeev/containers/facet2-bmad-pytao_latest.sif
+              export NOTEBOOK_ROOT=$HOME/facet2-bmad-pytao_UTILS_notebooks
+              mkdir -p $NOTEBOOK_ROOT
+              
+              # Define the jupyter function to use Apptainer for executing Jupyter with necessary bindings and running mkdir and cp commands
+              function jupyter() {
+              apptainer exec -B /usr,/sdf,/fs,/sdf/scratch,/lscratch ${APPTAINER_IMAGE_PATH} bash -c "
+                      mkdir -p ${NOTEBOOK_ROOT} &&
+                      cp -rn /opt/notebooks/* ${NOTEBOOK_ROOT}/";
+                  apptainer exec -B /usr,/sdf,/fs,/sdf/scratch,/lscratch ${APPTAINER_IMAGE_PATH}  jupyter $@;
+              }
+      -
         - Custom/Apptainer Image...
         - |
               export APPTAINER_IMAGE_PATH=<path to apptainer image>

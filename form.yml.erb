@@ -238,6 +238,13 @@ attributes:
               export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/group/nexo/software/chroma/Chroma_latest.sif
               function jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@; }
       -
+        - nexo/pydan
+        - |
+              export CONDA_PREFIX=/sdf/group/exo/users/RnAssay/conda
+              export PATH=${CONDA_PREFIX}/bin/:$PATH
+              source ${CONDA_PREFIX}/etc/profile.d/conda.sh
+              conda activate pydan
+      -
         - facet2/impact_bmad_sim
         - |
               # APPTAINER_IMAGE_PATH is a locally kept copy of slacact/impact-bmad (docker hub)
@@ -250,6 +257,19 @@ attributes:
                       mkdir -p ${NOTEBOOK_ROOT} &&
                       cp -rn /opt/notebooks/* ${NOTEBOOK_ROOT}/";
                 	apptainer exec -B /usr,/sdf,/fs,/sdf/scratch,/lscratch ${APPTAINER_IMAGE_PATH}  jupyter $@; }
+      -
+        - facet2/impact_bmad_utility
+        - |
+              export APPTAINER_IMAGE_PATH=/sdf/group/facet/sanjeev/containers/facet2-bmad-pytao_latest.sif
+              export NOTEBOOK_ROOT=$HOME/facet2-bmad-pytao_UTILS_notebooks
+              mkdir -p $NOTEBOOK_ROOT
+             
+              # Define the jupyter function to use Apptainer for executing Jupyter with necessary bindings and running mkdir and cp commands
+              function jupyter() {
+              apptainer exec -B /usr,/sdf,/fs,/sdf/scratch,/lscratch ${APPTAINER_IMAGE_PATH} bash -c "
+                      mkdir -p ${NOTEBOOK_ROOT} &&
+                      cp -rn /opt/notebooks/* ${NOTEBOOK_ROOT}/";
+                    apptainer exec -B /usr,/sdf,/fs,/sdf/scratch,/lscratch ${APPTAINER_IMAGE_PATH}  jupyter $@; }
       -
         - Custom/Apptainer Image...
         - |

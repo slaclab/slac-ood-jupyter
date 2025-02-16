@@ -187,6 +187,18 @@ attributes:
               export PYTHONPATH=\"\"
               function jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@ ; }
       -
+        - neutrino-jupyter/2025-02-16
+        - |
+              export SINGULARITY_IMAGE_PATH=/sdf/group/neutrino/images/larcv2_ub2204-cu121-torch251-larndsim.sif
+              export PYTHONPATH=\"\"
+              function jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@ ; }
+      -
+        - neutrino-jupyter/2024-09-03
+        - |
+              export SINGULARITY_IMAGE_PATH=/sdf/group/neutrino/images/larcv2_ub22.04-cuda12.1-pytorch2.4.0-larndsim-2024-09-03.sif
+              export PYTHONPATH=\"\"
+              function jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@ ; }
+      -
         - neutrino-jupyter/2024-03-08
         - |
               export SINGULARITY_IMAGE_PATH=/sdf/group/neutrino/images/larcv2_ub20.04-cuda12.1-pytorch2.2.1-larndsim.sif

@@ -119,7 +119,7 @@ attributes:
       -
         - slac/20211101.0
         - |
-              export SINGULARITY_IMAGE_PATH=/fs/ddn/sdf/group/ml/software/images/slac-ml/20211101.0/slac-ml@20211101.0.sif
+              export SINGULARITY_IMAGE_PATH=/sdf/group/lcls/ds/tools/software/images/slac-ml/20211101.0/slac-ml@20211101.0.sif
               function jupyter() { singularity exec --nv -B /sdf,/fs,/sdf/scratch/,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@; }
       -
         - LCLS/LCLS1-py3
@@ -136,7 +136,7 @@ attributes:
       -
         - slac/SSAI
         - |
-              export SINGULARITY_IMAGE_PATH=/fs/ddn//sdf/group/ml/datasets/images/shared.sif
+              export SINGULARITY_IMAGE_PATH=/sdf/group/mli/datasets/images/shared.sif
               export PYTHONPATH=\"\"
               function jupyter() { singularity exec --nv -B /sdf,/fs,/lscratch ${SINGULARITY_IMAGE_PATH} jupyter $@ ;}
       -

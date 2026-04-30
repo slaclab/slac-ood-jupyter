@@ -246,6 +246,7 @@ function set_cluster_group_handler() {
   toggle_visibility_of_form_group( "#batch_connect_session_context_mem", batch );
   toggle_visibility_of_form_group( "#batch_connect_session_context_num_gpus", batch );
   toggle_visibility_of_form_group( "#batch_connect_session_context_slurm_reservation", batch );
+  toggle_visibility_of_form_group( "#batch_connect_session_context_slurm_constraint", batch );
 
   // Set dynamic cluster default based on Jupyter Image name (group selection)
   let group = $('#batch_connect_session_context_jupyter_image_group').find(':selected')[0].text;

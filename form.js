@@ -264,6 +264,12 @@ function set_cluster_group_handler() {
       case "neutrino":
         $('#batch_connect_session_context_cluster').val("neutrino_interactive");
         break;
+      case "ad":
+        $('#batch_connect_session_context_cluster').val("ad_interactive");
+        break;
+      case "hopper":
+        $('#batch_connect_session_context_cluster').val("hopper_interactive");
+        break;
       default:
         $('#batch_connect_session_context_cluster').val("iana_interactive");
     }
